@@ -1,0 +1,7 @@
+# for c++ standard
+build --cxxopt="-std=c++17"
+build --action_env=CXX=clang++
+
+# for c standard
+build --copt="-std=c17"
+build --action_env=CC=clang

@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# for vscode
+.vscode
+
+# for bazel output
+bazel-*
+MODULE.bazel.lock

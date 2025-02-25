@@ -1,0 +1,11 @@
+Build options: --cxxopt='-std=c++17' --action_env='CXX=clang++' --copt='-std=c17' --action_env='CC=clang' --explain=build.log --subcommands=pretty_print
+Executing action 'BazelWorkspaceStatusAction stable-status.txt': unconditional execution is requested.
+Executing action 'Creating source manifest for //src/app:MQSim': no entry in the cache (action is new).
+Executing action 'Writing repo mapping manifest for //src/app:MQSim': no entry in the cache (action is new).
+Executing action 'Writing file src/app/MQSim-2.params': no entry in the cache (action is new).
+Executing action 'Writing script external/bazel_tools/tools/cpp/link_extra_lib.cppmap': no entry in the cache (action is new).
+Executing action 'Writing script external/bazel_tools/tools/cpp/malloc.cppmap': no entry in the cache (action is new).
+Executing action 'Writing script src/app/MQSim.cppmap': no entry in the cache (action is new).
+Executing action 'Creating runfiles tree bazel-out/k8-fastbuild/bin/src/app/MQSim.runfiles': no entry in the cache (action is new).
+Executing action 'Compiling src/app/main.c': no entry in the cache (action is new).
+Executing action 'Linking src/app/MQSim': no entry in the cache (action is new).
