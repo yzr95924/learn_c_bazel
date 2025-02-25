@@ -57,3 +57,4 @@ dkms.conf
 # for bazel output
 bazel-*
 MODULE.bazel.lock
+build.log
