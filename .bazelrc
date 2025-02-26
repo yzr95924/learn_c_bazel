@@ -1,7 +1,22 @@
-# for c++ standard
-build --cxxopt="-std=c++17"
-build --action_env=CXX=clang++
+# common for c++
+build --cxxopt=-std=c++17
+build --action_env=CXX=g++
+build:debug --cxxopt=-g
+build:debug --cxxopt=-O0
+build:release --cxxopt=-O3
 
-# for c standard
+# common for c
 build --copt="-std=c17"
-build --action_env=CC=clang
+build --action_env=CC=gcc
+build:debug --copt=-g
+build:debug --copt=-O0
+build:release --copt=-O3
+
+# for --config=asan
+build:asan --strip=never
+build:asan --copt=-fno-omit-frame-pointer
+build:asan --copt=-fsanitize=address
+build:asan --linkopt=-fsanitize=address
+
+# for link
+# build:

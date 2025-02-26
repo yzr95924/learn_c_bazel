@@ -1,3 +1,3 @@
 #!/usr/bin/bash
-bazel clean
-bazel build //src/app:MQSim --explain=build.log --subcommands=pretty_print
+bazel clean --expunge
+bazel build --config=debug --config=asan //src/app:MQSim --explain=build.log --subcommands=pretty_print
