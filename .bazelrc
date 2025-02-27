@@ -1,6 +1,9 @@
 # common options
 common --enable_bzlmod # Enable Bzlmod for every Bazel command
 
+# registry, default BCR
+build --registry=https://bcr.bazel.build # BCR
+
 # common for c++
 build --cxxopt=-std=c++17
 build --action_env=CXX=g++
@@ -10,12 +13,12 @@ build:debug --cxxopt=-fno-omit-frame-pointer
 build:release --cxxopt=-O3
 
 # common for c
-build --copt=-std=c17
-build --action_env=CC=gcc
-build:debug --copt=-g
-build:debug --copt=-O0
-build:debug --copt=-fno-omit-frame-pointer
-build:release --copt=-O3
+# build --copt=-std=c17
+# build --action_env=CC=gcc
+# build:debug --copt=-g
+# build:debug --copt=-O0
+# build:debug --copt=-fno-omit-frame-pointer
+# build:release --copt=-O3
 
 # common for link
 build:debug --linkopt=-g
