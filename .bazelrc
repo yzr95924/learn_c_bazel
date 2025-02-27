@@ -6,7 +6,7 @@ build --registry=https://bcr.bazel.build # BCR
 
 # common for c++
 build --cxxopt=-std=c++17
-build --action_env=CXX=g++
+build --action_env=CXX=clang++
 build:debug --cxxopt=-g
 build:debug --cxxopt=-O0
 build:debug --cxxopt=-fno-omit-frame-pointer
@@ -29,5 +29,5 @@ build:asan --strip=never
 build:asan --copt=-fsanitize=address
 build:asan --linkopt=-fsanitize=address
 
-# for link
-# build:
+# for Termux only
+build:termux --linkopt=-llog
