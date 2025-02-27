@@ -1,20 +1,28 @@
+# common options
+common --enable_bzlmod # Enable Bzlmod for every Bazel command
+
 # common for c++
 build --cxxopt=-std=c++17
 build --action_env=CXX=g++
 build:debug --cxxopt=-g
 build:debug --cxxopt=-O0
+build:debug --cxxopt=-fno-omit-frame-pointer
 build:release --cxxopt=-O3
 
 # common for c
-build --copt="-std=c17"
+build --copt=-std=c17
 build --action_env=CC=gcc
 build:debug --copt=-g
 build:debug --copt=-O0
+build:debug --copt=-fno-omit-frame-pointer
 build:release --copt=-O3
+
+# common for link
+build:debug --linkopt=-g
+build:debug --strip=never
 
 # for --config=asan
 build:asan --strip=never
-build:asan --copt=-fno-omit-frame-pointer
 build:asan --copt=-fsanitize=address
 build:asan --linkopt=-fsanitize=address
 
