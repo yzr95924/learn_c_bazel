@@ -10,6 +10,7 @@ build --action_env=CXX=clang++
 build:debug --cxxopt=-g
 build:debug --cxxopt=-O0
 build:debug --cxxopt=-fno-omit-frame-pointer
+build:debug --cxxopt=-Wl,-Bsymbolic
 build:release --cxxopt=-O3
 
 # common for c
