@@ -1,0 +1,30 @@
+Build options: --enable_bzlmod --registry=https://bcr.bazel.build --cxxopt='-std=c++17' --action_env='CXX=clang++' --config=debug --cxxopt=-g --cxxopt=-O0 --cxxopt=-fno-omit-frame-pointer --cxxopt=-Wl,-Bsymbolic --linkopt=-g --strip=never --test_output=all --explain=test.log --subcommands=pretty_print
+Executing action 'BazelWorkspaceStatusAction stable-status.txt': unconditional execution is requested.
+Executing action 'Writing repo mapping manifest for //ut:main_test': no entry in the cache (action is new).
+Executing action 'Creating source manifest for //ut:main_test': no entry in the cache (action is new).
+Executing action 'Writing file ut/main_test-2.params': no entry in the cache (action is new).
+Executing action 'Writing file external/googletest~/libgtest_main.so-2.params': no entry in the cache (action is new).
+Executing action 'Writing file external/googletest~/libgtest.so-2.params': no entry in the cache (action is new).
+Executing action 'Creating runfiles tree bazel-out/k8-fastbuild/bin/ut/main_test.runfiles': no entry in the cache (action is new).
+Executing action 'Compiling ut/main_test.cc': no entry in the cache (action is new).
+Executing action 'Compiling googlemock/src/gmock-cardinalities.cc': no entry in the cache (action is new).
+Executing action 'Compiling googlemock/src/gmock_main.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest-typed-test.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest.cc': no entry in the cache (action is new).
+Executing action 'Compiling googlemock/src/gmock-internal-utils.cc': no entry in the cache (action is new).
+Executing action 'Compiling googlemock/src/gmock-matchers.cc': no entry in the cache (action is new).
+Executing action 'Compiling googlemock/src/gmock-spec-builders.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest-assertion-result.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest-filepath.cc': no entry in the cache (action is new).
+Executing action 'Compiling googlemock/src/gmock.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest-death-test.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest-matchers.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest-port.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest-test-part.cc': no entry in the cache (action is new).
+Executing action 'Compiling googletest/src/gtest-printers.cc': no entry in the cache (action is new).
+Executing action 'Linking external/googletest~/libgtest_main.so': no entry in the cache (action is new).
+Executing action 'SolibSymlink _solib_k8/libexternal_Sgoogletest~_Slibgtest_Umain.so': no entry in the cache (action is new).
+Executing action 'Linking external/googletest~/libgtest.so': no entry in the cache (action is new).
+Executing action 'SolibSymlink _solib_k8/libexternal_Sgoogletest~_Slibgtest.so': no entry in the cache (action is new).
+Executing action 'Linking ut/main_test': no entry in the cache (action is new).
+Executing action 'Testing //ut:main_test': unconditional execution is requested.

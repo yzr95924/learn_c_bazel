@@ -4,10 +4,10 @@ module(
     version = "0.0.1",
 )
 
-# The `repo_name` attribute allows users to reference this dependency via the `com_github_glog` repo name.
-bazel_dep(name = "glog", version = "0.7.1", repo_name = "com_github_glog")
-bazel_dep(name = "googletest", version = "1.16.0", repo_name = "com_github_googletest")
-bazel_dep(name = "google_benchmark", version = "1.9.1", repo_name = "com_github_google_benchmark")
+# The `repo_name` attribute allows users to reference this dependency via the `com_glog` repo name.
+bazel_dep(name = "glog", version = "0.7.1", repo_name = "com_glog")
+bazel_dep(name = "googletest", version = "1.16.0", repo_name = "com_googletest")
+bazel_dep(name = "google_benchmark", version = "1.9.1", repo_name = "com_google_benchmark")
 
 # Hedron's Compile Commands Extractor for Bazel
 # https://github.com/hedronvision/bazel-compile-commands-extractor
