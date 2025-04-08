@@ -1,1 +1,1 @@
-workspace(name= "yzr95924_MQSim_bazel")
+workspace(name= "mqsim_bazel")

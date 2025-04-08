@@ -1,9 +1,9 @@
-"""extern module dependencies"""
 module(
     name = "mqsim_bazel",
     version = "0.0.1",
 )
 
+"""extern module dependencies"""
 # The `repo_name` attribute allows users to reference this dependency via the `com_glog` repo name.
 bazel_dep(name = "glog", version = "0.7.1", repo_name = "com_glog")
 bazel_dep(name = "googletest", version = "1.16.0", repo_name = "com_googletest")
