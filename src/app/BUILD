@@ -4,6 +4,7 @@ cc_binary(
         "main.cc"
     ],
     deps = [
-        "@com_glog//:glog"
+        "@com_glog//:glog",
+        "//:my_lib"
     ],
 )

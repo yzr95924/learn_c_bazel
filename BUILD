@@ -15,3 +15,10 @@ refresh_compile_commands(
       # As are additional targets (+) and subtractions (-), like in bazel query https://docs.bazel.build/versions/main/query.html#expressions
     # And if you're working on a header-only library, specify a test or binary target that compiles it.
 )
+
+cc_import(
+    name = "my_lib",
+    static_library = "third_part_lib/libmy_module_1.a",
+    hdrs = glob(["third_part_lib/*.h"]),
+    visibility = ["//visibility:public"],
+)
