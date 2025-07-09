@@ -1,5 +1,5 @@
 module(
-    name = "mqsim_bazel",
+    name = "learn_c_bazel",
     version = "0.0.1",
 )
 

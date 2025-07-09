@@ -1,1 +1,1 @@
-workspace(name= "mqsim_bazel")
+workspace(name= "learn_c_bazel")
