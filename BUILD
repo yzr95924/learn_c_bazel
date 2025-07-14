@@ -6,7 +6,7 @@ refresh_compile_commands(
     # Specify the targets of interest.
     # For example, specify a dict of targets and any flags required to build.
     targets = {
-      "//src/app:MQSim": "",
+      "//src/app:all": "",
       "//ut:main_test": "",
     },
     # No need to add flags already in .bazelrc. They're automatically picked up.
@@ -16,9 +16,16 @@ refresh_compile_commands(
     # And if you're working on a header-only library, specify a test or binary target that compiles it.
 )
 
-cc_import(
-    name = "my_lib",
-    static_library = "third_part_lib/libmy_module_1.a",
-    hdrs = glob(["third_part_lib/*.h"]),
-    visibility = ["//visibility:public"],
+config_setting(
+    name = "debug_mode",
+    values = {
+        "compilation_mode": "dbg",
+    }
+)
+
+config_setting(
+    name = "release_mode",
+    values = {
+        "compilation_mode": "opt",
+    }
 )

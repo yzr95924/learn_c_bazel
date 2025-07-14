@@ -5,21 +5,8 @@ common --enable_bzlmod # Enable Bzlmod for every Bazel command
 build --registry=https://bcr.bazel.build # BCR
 
 # common for c++
-build --cxxopt=-std=c++17
 build --action_env=CXX=clang++
-build:debug --cxxopt=-g
-build:debug --cxxopt=-O0
-build:debug --cxxopt=-fno-omit-frame-pointer
-build:debug --cxxopt=-Wl,-Bsymbolic
-build:release --cxxopt=-O3
-
-# common for c
-# build --copt=-std=c17
-# build --action_env=CC=gcc
-# build:debug --copt=-g
-# build:debug --copt=-O0
-# build:debug --copt=-fno-omit-frame-pointer
-# build:release --copt=-O3
+build --action_env=CC=gcc
 
 # common for link
 build:debug --linkopt=-g
