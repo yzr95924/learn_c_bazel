@@ -1,4 +1,4 @@
-load("//buildframe:defs.bzl", "GLOBAL_COPTS")
+load("@my_buildframe//:copts.bzl", "GLOBAL_DEFAULT_COPTS", "GLOBAL_LINK_OPTS")
 load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
 
 cc_binary(
@@ -9,5 +9,6 @@ cc_binary(
     deps = [
         "@com_glog//:glog",
     ],
-    copts = GLOBAL_COPTS,
+    copts = GLOBAL_DEFAULT_COPTS,
+    linkopts = GLOBAL_LINK_OPTS
 )

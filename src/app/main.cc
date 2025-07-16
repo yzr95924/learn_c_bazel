@@ -6,7 +6,7 @@ int main(int argc, char** argv) {
     FLAGS_logtostderr = true;
 
     uint8_t *buf = (uint8_t *)malloc(1);
-    free(buf);
+    memset(buf, 1, 1);
     LOG(INFO) << "hello world: " << argc;
     google::ShutdownGoogleLogging();
     return 0;

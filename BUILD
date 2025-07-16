@@ -29,3 +29,19 @@ config_setting(
         "compilation_mode": "opt",
     }
 )
+
+# switch of using asan
+config_setting(
+    name = "use_asan",
+    values = {
+        "define": "use_asan=true",
+    }
+)
+
+platform(
+    name = "linux_x86_64",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ]
+)
