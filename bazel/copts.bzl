@@ -53,6 +53,7 @@ ASAN_COPTS = [
 
 ASAN_LINK_OPTS = [
     "-lasan",
+    # "-fsanitize=address"
 ]
 
 GLOBAL_LINK_OPTS = select({
@@ -71,4 +72,6 @@ GLOBAL_DEFAULT_COPTS = DEFAULT_WARNING_FLAGS + select({
     "//:debug_mode": ["-g", "-O0"],
     "//:release_mode": ["-O3"],
     "//conditions:default": [],
-})
+}) + [
+    "-std=c++14"
+]

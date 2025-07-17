@@ -22,7 +22,7 @@ bazel_dep(name = "googletest", version = "1.16.0", repo_name = "com_googletest")
 bazel_dep(name = "google_benchmark", version = "1.9.1", repo_name = "com_google_benchmark")
 
 # bazel build tool
-bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "platforms", version = "1.0.0", repo_name = "platforms")
 bazel_dep(name = "rules_cc", version = "0.1.2", repo_name = "rules_cc")
 
 # Hedron's Compile Commands Extractor for Bazel
@@ -34,4 +34,8 @@ git_override(
     commit = "4f28899228fb3ad0126897876f147ca15026151e",
     # Replace the commit hash (above) with the latest (https://github.com/hedronvision/bazel-compile-commands-extractor/commits/main).
     # Even better, set up Renovate and let it do the work for you (see "Suggestion: Updates" in the README).
+)
+
+register_toolchains(
+    "@my_buildframe//:cc_toolchain_for_linux_x86_64"
 )
