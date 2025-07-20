@@ -36,6 +36,7 @@ git_override(
     # Even better, set up Renovate and let it do the work for you (see "Suggestion: Updates" in the README).
 )
 
-register_toolchains(
-    "@my_buildframe//:cc_toolchain_for_linux_x86_64"
-)
+# 自己可以构建cc_toolchain
+# register_toolchains(
+#     "@my_buildframe//:cc_toolchain_for_linux_x86_64"
+# )

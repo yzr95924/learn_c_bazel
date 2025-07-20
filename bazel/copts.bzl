@@ -57,7 +57,7 @@ ASAN_LINK_OPTS = [
 ]
 
 GLOBAL_LINK_OPTS = select({
-    "//:debug_mode": ["-g"],
+    "//:debug_mode": ["-g", "-O0"],
     "//:release_mode": [],
     "//conditions:default": [],
 }) + select({
@@ -73,5 +73,6 @@ GLOBAL_DEFAULT_COPTS = DEFAULT_WARNING_FLAGS + select({
     "//:release_mode": ["-O3"],
     "//conditions:default": [],
 }) + [
-    "-std=c++14"
+    "-std=c++14",
+    "-fPIC",
 ]

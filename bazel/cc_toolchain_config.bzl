@@ -72,7 +72,7 @@ def _impl(ctx):
         tool_paths = tool_paths,
     )
 
-cc_toolchain_config = rule(
+my_cc_toolchain_config = rule(
     implementation = _impl,
     attrs = {},
     provides = [CcToolchainConfigInfo],

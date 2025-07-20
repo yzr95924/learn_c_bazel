@@ -1,10 +1,10 @@
-load(":cc_toolchain_config.bzl", "cc_toolchain_config")
+load(":cc_toolchain_config.bzl", "my_cc_toolchain_config")
 load("@rules_cc//cc/toolchains:cc_toolchain.bzl", "cc_toolchain")
 
 package(default_visibility = ["//visibility:public"])
 filegroup(name = "empty")
 
-cc_toolchain_config(name = "linux_x86_64_toolchain_config")
+my_cc_toolchain_config(name = "linux_x86_64_toolchain_config")
 cc_toolchain(
     name = "linux_x86_64_toolchain",
     toolchain_identifier = "linux_x86_64-toolchain",

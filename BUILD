@@ -45,3 +45,11 @@ platform(
         "@platforms//cpu:x86_64",
     ]
 )
+
+platform(
+    name = "termux",
+    constraint_values = [
+        "@platforms//os:android",
+        "@platforms//cpu:aarch64",
+    ]
+)
