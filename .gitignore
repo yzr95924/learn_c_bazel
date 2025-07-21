@@ -55,7 +55,6 @@ dkms.conf
 .vscode
 
 # for bazel output
-bazel-*
 MODULE.bazel.lock
 build.log
 compile_commands.json
@@ -63,3 +62,10 @@ compile_commands.json
 ~/.cache
 third_part_lib
 log
+external
+bazel-*
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-genfiles
+bazel-learn_c_bazel
