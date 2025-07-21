@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 bazel clean
-bazel build --compilation_mode=dbg --define=use_asan=true \
+bazel build --compilation_mode=dbg \
+    --define=use_asan=true \
     @learn_c_bazel//src/app:MQSim \
-    --platforms=@learn_c_bazel//:linux_x86_64 \
     --explain=build.log \
     --subcommands=pretty_print \
     --verbose_failures

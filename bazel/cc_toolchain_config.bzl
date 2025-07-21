@@ -47,7 +47,7 @@ def _impl(ctx):
         ctx = ctx,
         features = features,
         cxx_builtin_include_directories = [
-            # 使用命令 echo | clang++ -x c++ -E -v - 2>&1 | grep "^ /"
+            # 使用命令 echo | clang++ -x c++ -E -v - 2>&1 | grep "^ /" 或者 "gcc -E -xc++ - -v"
             # 系统头文件
             "/usr/include",
             "/usr/include/x86_64-linux-gnu",

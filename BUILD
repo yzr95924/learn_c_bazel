@@ -38,18 +38,18 @@ config_setting(
     }
 )
 
+# switch of using termux
+config_setting(
+    name = "use_termux",
+    values = {
+        "define": "use_termux=true",
+    }
+)
+
 platform(
     name = "linux_x86_64",
     constraint_values = [
         "@platforms//os:linux",
         "@platforms//cpu:x86_64",
-    ]
-)
-
-platform(
-    name = "termux",
-    constraint_values = [
-        "@platforms//os:android",
-        "@platforms//cpu:aarch64",
     ]
 )

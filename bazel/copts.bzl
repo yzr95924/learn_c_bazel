@@ -63,7 +63,12 @@ GLOBAL_LINK_OPTS = select({
 }) + select({
     "//:use_asan": ASAN_LINK_OPTS,
     "//conditions:default": [],
-})
+}) + select({
+    "//:use_termux": ["-llog"],
+    "//conditions:default": []
+}) + [
+    "-Wl,-Bsymbolic",
+]
 
 GLOBAL_DEFAULT_COPTS = DEFAULT_WARNING_FLAGS + select({
     "//:use_asan": ASAN_COPTS,
@@ -72,7 +77,12 @@ GLOBAL_DEFAULT_COPTS = DEFAULT_WARNING_FLAGS + select({
     "//:debug_mode": ["-g", "-O0"],
     "//:release_mode": ["-O3"],
     "//conditions:default": [],
+}) + select({
+    "@platforms//os:linux": ["-D_LINUX"],
+    "@platforms//os:windows": ["-D_WINDOWS"],
+    "//conditions:default": []
 }) + [
     "-std=c++14",
     "-fPIC",
+    "-fPIE",
 ]

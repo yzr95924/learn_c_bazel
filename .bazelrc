@@ -7,6 +7,3 @@ build --registry=https://bcr.bazel.build # BCR
 # common for c++
 build --action_env=CXX=clang++
 build --action_env=CC=clang
-
-# for Termux only
-build:termux --linkopt=-llog
