@@ -8,7 +8,7 @@ cc_binary(
     ],
     deps = [
         "@com_glog//:glog",
-        "@com_postgres//:libpq",
+        "@libpq",
     ],
     copts = GLOBAL_DEFAULT_COPTS,
     linkopts = GLOBAL_LINK_OPTS,

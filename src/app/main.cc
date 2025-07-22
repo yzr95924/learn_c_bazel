@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "glog/logging.h"
-#include "libpq/libpq.h"
+#include "libpq-fe.h"
 
 int main(int argc, char** argv) {
     google::InitGoogleLogging(argv[0]);

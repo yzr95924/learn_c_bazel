@@ -18,15 +18,13 @@ local_path_override(
 # bazel build tool
 bazel_dep(name = "platforms", version = "1.0.0", repo_name = "platforms")
 bazel_dep(name = "rules_cc", version = "0.1.2", repo_name = "rules_cc")
+bazel_dep(name = "rules_foreign_cc", version = "0.15.0", repo_name = "rules_foreign_cc")
 
 # google suit
 # The `repo_name` attribute allows users to reference this dependency via the `com_glog` repo name.
 bazel_dep(name = "glog", version = "0.7.1", repo_name = "com_glog")
 bazel_dep(name = "googletest", version = "1.16.0", repo_name = "com_googletest")
 bazel_dep(name = "google_benchmark", version = "1.9.1", repo_name = "com_google_benchmark")
-
-# for libpq
-bazel_dep(name = "postgres", version = "16.2", repo_name = "com_postgres")
 
 # Hedron's Compile Commands Extractor for Bazel
 # https://github.com/hedronvision/bazel-compile-commands-extractor
@@ -43,3 +41,10 @@ git_override(
 # register_toolchains(
 #     "@my_buildframe//:cc_toolchain_for_linux_x86_64"
 # )
+
+libpq_repo = use_repo_rule(
+    "//:sys_repo.bzl",
+    "libpq_repo"
+)
+
+libpq_repo(name = "libpq")

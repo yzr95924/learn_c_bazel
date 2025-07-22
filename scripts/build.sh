@@ -6,5 +6,4 @@ bazel build --compilation_mode=dbg \
     --explain=build.log \
     --subcommands=pretty_print \
     --verbose_failures
-# bazel run @hedron_compile_commands//:refresh_all -- --config=debug
-#bazel run //:refresh_compile_commands -- --compilation_mode=dbg
+bazel run //:refresh_compile_commands -- --compilation_mode=dbg
