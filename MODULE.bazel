@@ -42,9 +42,8 @@ git_override(
 #     "@my_buildframe//:cc_toolchain_for_linux_x86_64"
 # )
 
-libpq_repo = use_repo_rule(
-    "//:sys_repo.bzl",
-    "libpq_repo"
+pkg_config_repo_rule = use_repo_rule("//bazel:pkg_config.bzl", "pkg_config_repo_rule")
+pkg_config_repo_rule(
+    name = "libpq",
+    modname = "libpq",
 )
-
-libpq_repo(name = "libpq")

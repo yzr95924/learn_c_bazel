@@ -320,6 +320,7 @@ cc_library(
     return struct(error = error)
 
 def _impl(repository_ctx):
+    print("[MY_DEBUG]: use pkg_config_repo_rule for {}".format(repository_ctx.attr.modname))
     result = setup_pkg_config_repository(repository_ctx)
     if result.error != None:
         fail("Unable to complete pkg-config setup for " +
@@ -328,15 +329,20 @@ def _impl(repository_ctx):
                  result.error,
              ))
 
-_do_pkg_config_repository = repository_rule(
+pkg_config_repo_rule = repository_rule(
     # TODO(jamiesnape): Make licenses mandatory.
     # TODO(jamiesnape): Use of this rule may cause additional transitive
     # dependencies to be linked and their licenses must also be enumerated.
+    implementation = _impl,
     attrs = {
         "licenses": attr.string_list(),
-        "modname": attr.string(mandatory = True),
+        "modname": attr.string(
+            mandatory = True,
+        ),
         "atleast_version": attr.string(),
-        "static": attr.bool(default = _DEFAULT_STATIC),
+        "static": attr.bool(
+            default = _DEFAULT_STATIC,
+        ),
         "build_file_template": attr.label(
             default = _DEFAULT_TEMPLATE,
             allow_files = True,
@@ -355,7 +361,6 @@ _do_pkg_config_repository = repository_rule(
     },
     local = True,
     configure = True,
-    implementation = _impl,
 )
 
 def pkg_config_repository(**kwargs):
@@ -419,4 +424,4 @@ def pkg_config_repository(**kwargs):
     if "deprecation" in kwargs:
         fail("When calling pkg_config_repository, don't use deprecation=str " +
              "to deprecate a library; instead use extra_deprecation=str.")
-    _do_pkg_config_repository(**kwargs)
+    pkg_config_repo_rule(**kwargs)

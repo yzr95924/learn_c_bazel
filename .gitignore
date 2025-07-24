@@ -60,7 +60,7 @@ MODULE.bazel.lock
 build.log
 compile_commands.json
 *.log
-~/.cache
+.cache
 third_part_lib
 log
 external
