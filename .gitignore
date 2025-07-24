@@ -69,4 +69,5 @@ bazel-bin
 bazel-out
 bazel-testlogs
 bazel-genfiles
+bazel-learn_c_bazel/*
 bazel-learn_c_bazel
