@@ -134,6 +134,7 @@ def _maybe_setup_pkg_config_repository(repository_ctx):
         if i == 0:
             return struct(error = "malformed linkopts: " + repr(linkopts))
         linkopts[i - 1] += " " + non_switch_arg
+    print("[MY_DEBUG]: find linkopts({}) for {}".format(linkopts, library_name))
 
     # Determine cflags; we'll split into includes and defines in a moment.
     result = _run_pkg_config(
@@ -235,6 +236,7 @@ def _maybe_setup_pkg_config_repository(repository_ctx):
     )
     if extra_deprecation == "":
         extra_deprecation = None
+    print("[MY_DEBUG]: find inlcudes({}) for {}".format(includes, library_name))
 
     # Write out the BUILD.bazel file.
     substitutions = {

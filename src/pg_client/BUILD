@@ -1,0 +1,22 @@
+load("@my_buildframe//:copts.bzl", "GLOBAL_DEFAULT_COPTS")
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "pg_client",
+    srcs = [
+        "pg_client.cc",
+    ],
+    hdrs = [
+        "pg_client.h",
+    ],
+    includes = [
+        ".",
+    ],
+    deps = [
+        "@libpq",
+        "@com_glog//:glog",
+    ],
+    copts = GLOBAL_DEFAULT_COPTS,
+    linkopts = [],
+)

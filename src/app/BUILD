@@ -7,8 +7,7 @@ cc_binary(
         "main.cc"
     ],
     deps = [
-        "@com_glog//:glog",
-        "@libpq",
+        "//src/pg_client:pg_client",
     ],
     copts = GLOBAL_DEFAULT_COPTS,
     linkopts = GLOBAL_LINK_OPTS,
