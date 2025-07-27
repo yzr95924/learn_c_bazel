@@ -14,8 +14,10 @@
 #include "libpq-fe.h"
 #include "glog/logging.h"
 
-int32_t PGClientInit(PGconn **retConn);
-
-void PGClientClose(PGconn **conn);
+/**
+ * @brief main function for demo pg client
+ *
+ */
+void PGClientDemo();
 
 #endif

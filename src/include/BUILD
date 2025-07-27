@@ -3,21 +3,15 @@ load("@rules_cc//cc:cc_library.bzl", "cc_library")
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
-    name = "pg_client",
-    srcs = [
-        "pg_client.cc",
-    ],
+    name = "inner_include",
+    srcs = [],
     hdrs = [
-        "pg_client.h",
+        "common_util.h",
     ],
     includes = [
         ".",
     ],
-    deps = [
-        "@libpq",
-        "@com_glog//:glog",
-        "//src/include:inner_include",
-    ],
+    deps = [],
     copts = GLOBAL_DEFAULT_COPTS,
     linkopts = [],
 )

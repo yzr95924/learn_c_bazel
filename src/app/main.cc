@@ -1,23 +1,24 @@
 #include <stdio.h>
+
 #include "pg_client.h"
+#include "common_util.h"
+
+static void InitGlog(const char *argv0) {
+    google::InitGoogleLogging(argv0);
+    FLAGS_logtostderr = true;
+    FLAGS_colorlogtostderr = true;
+};
+
+static void ReleaseGlog()
+{
+    google::ShutdownGoogleLogging();
+}
 
 int main(int argc, char** argv) {
-    google::InitGoogleLogging(argv[0]);
-    FLAGS_logtostderr = true;
-    int32_t ret = 0;
-    PGconn *conn = NULL;
+    UNUSED_PARAM(argc);
 
-    ret = PGClientInit(&conn);
-    if (ret != 0) {
-        return ret;
-    } else {
-        PGClientClose(&conn);
-    }
-
-    uint8_t *buf = (uint8_t *)malloc(32);
-    memset(buf, 1, 1);
-    buf = NULL;
-    LOG(INFO) << "hello world: " << argc;
-    google::ShutdownGoogleLogging();
+    InitGlog(argv[0]);
+    PGClientDemo();
+    ReleaseGlog();
     return 0;
 }
