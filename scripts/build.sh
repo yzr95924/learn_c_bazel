@@ -6,4 +6,5 @@ bazel build --compilation_mode=dbg \
     --explain=build.log \
     --subcommands=pretty_print \
     --verbose_failures
-bazel run //:refresh_compile_commands -- --compilation_mode=dbg
+
+python3 ./scripts/generate_compile_commands.py

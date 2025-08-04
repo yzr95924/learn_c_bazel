@@ -7,7 +7,6 @@ refresh_compile_commands(
     # For example, specify a dict of targets and any flags required to build.
     targets = {
       "//src/app:all": "",
-      "//ut:main_test": "",
     },
     # No need to add flags already in .bazelrc. They're automatically picked up.
     # If you don't need flags, a list of targets is also okay, as is a single target string.

@@ -12,6 +12,9 @@
 #ifndef LEARN_C_BAZEL_COMMON_UTIL
 #define LEARN_C_BAZEL_COMMON_UTIL
 
+#include <stdint.h>
+#include <stdio.h>
+
 #ifndef UNUSED_PARAM(x)
 #define UNUSED_PARAM(x) (void)(x)
 #endif

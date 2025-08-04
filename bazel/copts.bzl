@@ -68,6 +68,7 @@ GLOBAL_LINK_OPTS = select({
     "//conditions:default": []
 }) + [
     "-Wl,-Bsymbolic",
+    "-fPIC",
 ]
 
 GLOBAL_DEFAULT_COPTS = DEFAULT_WARNING_FLAGS + select({
@@ -84,5 +85,5 @@ GLOBAL_DEFAULT_COPTS = DEFAULT_WARNING_FLAGS + select({
 }) + [
     "-std=c++14",
     "-fPIC",
-    "-fPIE",
+    # "-fPIE",
 ]
