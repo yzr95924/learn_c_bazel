@@ -11,7 +11,20 @@
 
 #include "rest_server.h"
 
+httplib::Server *g_rest_server_ptr;
+constexpr const int kListenPort = 12345;
+
 int32_t RestServerInit()
 {
+    g_rest_server_ptr = new httplib::Server();
+    // g_rest_server_ptr->listen("localhost", kListenPort);
+
+    LOG(INFO) << "init RestServer done, listen: " << kListenPort;
     return 0;
+}
+
+void RestServerDestroy()
+{
+    delete g_rest_server_ptr;
+    LOG(INFO) << "destroy RestServer done";
 }

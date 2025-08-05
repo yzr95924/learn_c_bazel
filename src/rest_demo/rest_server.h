@@ -14,8 +14,10 @@
 
 #include "common_util.h"
 #include "httplib.h"
+#include "glog/logging.h"
 
 int32_t RestServerInit();
 
+void RestServerDestroy();
 
 #endif

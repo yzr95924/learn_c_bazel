@@ -10,9 +10,41 @@
  */
 
 #include "gtest/gtest.h"
+#include "rest_server.h"
 
-TEST(RestServerTest, BasicAssertions)
+constexpr const char* kTestName = "RestServerTest";
+class RestServerTest : public testing::Test {
+    protected:
+        void SetUp() override {
+            // run at the begining of each test case
+            return;
+        }
+
+        void TearDown() override {
+            // run at the end of each test case
+            return;
+        }
+
+        static void SetUpTestSuite() {
+            // run for the whole test class
+            google::InitGoogleLogging(kTestName);
+            FLAGS_logtostderr = true;
+            FLAGS_colorlogtostderr = true;
+            FLAGS_colorlogtostdout = true;
+            return;
+        }
+
+        static void TearDownTestSuite() {
+            // run for the whole test class
+            google::ShutdownGoogleLogging();
+            return;
+        }
+};
+
+TEST_F(RestServerTest, RestServerInit_OK)
 {
-    EXPECT_STRNE("hello", "world");
-    EXPECT_EQ(7 * 6, 42);
+    int32_t ret = 0;
+    ret = RestServerInit();
+    EXPECT_EQ(ret, 0);
+    RestServerDestroy();
 }
