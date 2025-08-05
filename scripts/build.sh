@@ -7,4 +7,5 @@ bazel build --compilation_mode=dbg \
     --subcommands=pretty_print \
     --verbose_failures
 
-python3 ./scripts/generate_compile_commands.py
+python3 ./scripts/generate_compile_commands.py \
+    -o \"--compilation_mode=dbg\"

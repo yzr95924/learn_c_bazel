@@ -5,6 +5,21 @@ import shutil
 import logging
 import subprocess
 import os
+import argparse
+
+_G_PARSER = argparse.ArgumentParser(
+    description="script to generate compile_commands.json"
+)
+_G_PARSER.add_argument("-o",
+                       "--option",
+                       type=str,
+                       required=True,
+                       help="bazel compile args")
+_G_PARSER.add_argument("-t",
+                       "--target",
+                       type=str,
+                       help="bazel build target",
+                       default="//...")
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -13,14 +28,8 @@ logging.basicConfig(
 )
 _G_BAZEL_COMPILE_COMMANDS_TOOL = "bazel-compile-commands"
 _G_JSON_FORMAT_TOOL = "jq"
-_G_BAZEL_BUILD_ARGS = (
-    "--compilation_mode=dbg"
-)
-_G_BAZEL_COMPILE_COMMANDS_ARGS = (
-    "--verbose "
-    "--resolve "
-    f"-b \"{_G_BAZEL_BUILD_ARGS}\" "
-)
+_G_BAZEL_BUILD_ARGS = ""
+_G_BAZEL_COMPILE_COMMANDS_ARGS = ""
 
 def _run_shell_cmd(cmd: str, cwd: str):
     logging.debug("run cmd in %s: %s", cwd, cmd)
@@ -80,7 +89,7 @@ def format_compile_json(json_path: str) -> int:
         logging.error("cannot find %s in system",
                       _G_JSON_FORMAT_TOOL)
         return -1
-    cmd = f"jq . {json_path}> tmp.json && mv tmp.json {json_path}"
+    cmd = f"jq . {json_path} > tmp.json && mv tmp.json {json_path}"
     ret_code, _ = _run_shell_cmd(cmd, os.getcwd())
     if ret_code != 0:
         logging.error("format %s failed", json_path)
@@ -112,6 +121,19 @@ def replace_bazel_exec_path(json_path) -> int:
     return 0
 
 if __name__ == "__main__":
+    args = _G_PARSER.parse_args()
+    _G_BAZEL_BUILD_ARGS = args.option
+    logging.info("BAZEL_BUILD_ARGS: %s", _G_BAZEL_BUILD_ARGS)
+    build_target = args.target
+
+    _G_BAZEL_COMPILE_COMMANDS_ARGS = (
+        "--verbose "
+        "--resolve "
+        f"--target {build_target} "
+        f"-b \"{_G_BAZEL_BUILD_ARGS}\" "
+    )
+    logging.info("BAZEL_COMPILE_COMMANDS_ARGS: %s", _G_BAZEL_COMPILE_COMMANDS_ARGS)
+
     if generate_compile_commands() != 0:
         logging.error("generate compile commands failed")
         exit(-1)
