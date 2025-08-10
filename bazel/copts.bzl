@@ -52,16 +52,17 @@ ASAN_COPTS = [
 ]
 
 ASAN_LINK_OPTS = [
-    "-lasan",
-    # "-fsanitize=address"
+    # "-lasan",
+    "-fsanitize=address",
+    "-Wl,--exclude-libs=libasan.so"
 ]
 
 GLOBAL_LINK_OPTS = select({
-    "//:debug_mode": ["-g", "-O0"],
-    "//:release_mode": [],
+    "//:use_asan": ASAN_LINK_OPTS,
     "//conditions:default": [],
 }) + select({
-    "//:use_asan": ASAN_LINK_OPTS,
+    "//:debug_mode": ["-g", "-O0"],
+    "//:release_mode": [],
     "//conditions:default": [],
 }) + select({
     "//:use_termux": ["-llog"],

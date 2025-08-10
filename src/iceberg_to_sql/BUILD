@@ -1,0 +1,23 @@
+load("@my_buildframe//:copts.bzl", "GLOBAL_DEFAULT_COPTS")
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "iceberg_to_sql",
+    srcs = glob([
+        "*.cc",
+    ]),
+    hdrs = [
+        "iceberg_to_sql.h",
+    ],
+    includes = [
+        ".",
+    ],
+    deps = [
+        "@com_cjson//:cjson",
+        "@com_glog//:glog",
+        "//src/include:inner_include",
+    ],
+    copts = GLOBAL_DEFAULT_COPTS,
+    linkopts = [],
+)

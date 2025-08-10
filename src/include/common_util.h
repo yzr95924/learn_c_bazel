@@ -14,10 +14,13 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <error.h>
 
 #ifndef UNUSED_PARAM(x)
-#define UNUSED_PARAM(x) (void)(x)
+#define UNUSED_PARAM(x) (void)(x);
 #endif
 
+#define MAX_NS_NAME_LEN 64
+#define MAX_TBL_NAME_LEN 64
 
 #endif

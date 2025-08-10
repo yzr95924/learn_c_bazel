@@ -1,0 +1,66 @@
+{
+    "name": "string",
+    "location": "s3://a/b/c",
+    "schema": {
+        "type": "struct",
+        "fields": [
+            {
+                "id": 0,
+                "name": "string",
+                "type": [
+                    "long",
+                    "string",
+                    "fixed[16]",
+                    "decimal(10,2)"
+                ],
+                "required": true,
+                "doc": "string"
+            }
+        ],
+        "identifier-field-ids": [
+            0
+        ]
+    },
+    "partition-spec": {
+        "fields": [
+            {
+                "field-id": 0,
+                "source-id": 0,
+                "name": "string",
+                "transform": [
+                    "identity",
+                    "year",
+                    "month",
+                    "day",
+                    "hour",
+                    "bucket[256]",
+                    "truncate[16]"
+                ]
+            }
+        ]
+    },
+    "write-order": {
+        "fields": [
+            {
+                "source-id": 0,
+                "transform": [
+                    "identity",
+                    "year",
+                    "month",
+                    "day",
+                    "hour",
+                    "bucket[256]",
+                    "truncate[16]"
+                ],
+                "direction": "asc",
+                "null-order": "nulls-first"
+            }
+        ]
+    },
+    "stage-create": true,
+    "properties": {
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+    }
+}
