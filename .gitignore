@@ -52,7 +52,9 @@ Mkfile.old
 dkms.conf
 
 # for vscode
-.vscode
+.vscode/*
+!.vscode/c_cpp_properties.json
+!.vscode/settings.json
 
 # for bazel output
 bazel/MODULE.bazel.lock
