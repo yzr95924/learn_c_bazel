@@ -11,6 +11,12 @@
 
 #include "iceberg_to_sql.h"
 
+typedef struct {
+    const char *col_name;
+    const char *col_type;
+    const char *col_constraints; // "NOT NULL", "PRIMARY KEY"
+} SQLColDef;
+
 static cJSON *GetMultiLevelItem(const cJSON *body, const char *item_path)
 {
     char *item_path_copy = strdup(item_path);
@@ -32,10 +38,37 @@ static cJSON *GetMultiLevelItem(const cJSON *body, const char *item_path)
     return cur_child_body;
 }
 
+static int32_t GetFieldCnt(const cJSON *schema_fields)
+{
+    int32_t cnt = 0;
+    cJSON *field_item = NULL;
+    cJSON_ArrayForEach(field_item, schema_fields) {
+        cnt++;
+    }
+    LOG(INFO) << "total fields cnt: " << cnt;
+    return cnt;
+}
+
+static int32_t ParseFieldsArr(const cJSON *schema_fields, SQLColDef *sql_col_arr)
+{
+    cJSON *field_item = NULL;
+    uint32_t idx = 0;
+    cJSON_ArrayForEach(field_item, schema_fields) {
+        cJSON *col_name = cJSON_GetObjectItemCaseSensitive(field_item, "name");
+        sql_col_arr[idx].col_name = col_name->valuestring;
+        cJSON *col_type = cJSON_GetObjectItemCaseSensitive(field_item, "type");
+        sql_col_arr[idx].col_type = col_type->valuestring;
+        LOG(INFO) << "col_name: " << sql_col_arr[idx].col_name
+            << ", " << "col_type: " << sql_col_arr[idx].col_type;
+        idx++;
+    }
+    return 0;
+}
 
 int32_t IcebergToSQLCreateTblSQL(const LCSCreateTblReq *req, uint8_t **sql_buf)
 {
     UNUSED_PARAM(sql_buf)
+    int32_t col_cnt = 0;
     const cJSON *body = req->body;
     LOG(INFO) << "convert Iceberg to SQL";
     cJSON *location = cJSON_GetObjectItemCaseSensitive(body, "location");
@@ -47,8 +80,13 @@ int32_t IcebergToSQLCreateTblSQL(const LCSCreateTblReq *req, uint8_t **sql_buf)
     cJSON *schema_fields = GetMultiLevelItem(body, "schema.fields");
     if (!cJSON_IsArray(schema_fields)) {
         LOG(ERROR) << "schema.fields is not array";
+        return EINVAL;
     }
+    col_cnt = GetFieldCnt(schema_fields);
+    SQLColDef *col_def_arr = (SQLColDef*)malloc(sizeof(SQLColDef) * col_cnt);
 
+    ParseFieldsArr(schema_fields, col_def_arr);
+    free(col_def_arr);
     return 0;
 }
 

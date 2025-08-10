@@ -5,16 +5,17 @@
         "type": "struct",
         "fields": [
             {
-                "id": 0,
-                "name": "string",
-                "type": [
-                    "long",
-                    "string",
-                    "fixed[16]",
-                    "decimal(10,2)"
-                ],
+                "id": 1,
+                "name": "id",
+                "type": "long",
                 "required": true,
-                "doc": "string"
+                "doc": "user id"
+            },
+            {
+                "id": 2,
+                "name": "name",
+                "type": "string",
+                "doc": "user name"
             }
         ],
         "identifier-field-ids": [

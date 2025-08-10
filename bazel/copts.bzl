@@ -54,7 +54,6 @@ ASAN_COPTS = [
 ASAN_LINK_OPTS = [
     # "-lasan",
     "-fsanitize=address",
-    "-Wl,--exclude-libs=libasan.so"
 ]
 
 GLOBAL_LINK_OPTS = select({
