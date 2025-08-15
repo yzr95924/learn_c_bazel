@@ -13,6 +13,11 @@
 #include "iceberg_to_sql.h"
 
 constexpr const char *kTestName = "IcebergToSQLTest";
+constexpr const char *k_ns_name = "ns1";
+constexpr const char *k_tbl_name = "my_table";
+constexpr const char *k_warehouse_type = "local";
+constexpr const char *k_warehouse_path = "/tmp/iceberg_warehouse";
+
 class IcebergToSQLTest : public testing::Test {
     protected:
         void SetUp() override {
@@ -78,4 +83,36 @@ TEST_F(IcebergToSQLTest, IcebergToSQLCreateTblSQL_NORMAL)
     fclose(json_fd);
     cJSON_Delete(body);
     free(json_data_str_buf);
+}
+
+TEST_F(IcebergToSQLTest, IcebergToSQLDelTblSQLNew_NORMAL)
+{
+    LCSDelTblReq req = {};
+    memcpy(req.ns_name, k_ns_name, strlen(k_ns_name));
+    memcpy(req.tbl_name, k_tbl_name, strlen(k_tbl_name));
+
+    int32_t ret = 0;
+    uint8_t *sql_buf = NULL;
+    ret = IcebergToSQLDelTblSQLNew(&req, &sql_buf);
+    EXPECT_EQ(ret, 0);
+
+    IcebergToSQLFreeBuf(&sql_buf);
+}
+
+TEST_F(IcebergToSQLTest, IcebergToSQLCreateTblSQLNew_NORMAL)
+{
+    LCSCreateTblReq req = {};
+    memcpy(req.connConfig.type, k_warehouse_type,
+        strlen(k_warehouse_type));
+    memcpy(req.connConfig.warehouse_name, k_warehouse_path,
+        strlen(k_warehouse_path));
+    memcpy(req.ns_name, k_ns_name, strlen(k_ns_name));
+    memcpy(req.tbl_name, k_tbl_name, strlen(k_tbl_name));
+
+    int32_t ret = 0;
+    uint8_t *sql_buf = NULL;
+    ret = IcebergToSQLCreateTblSQLNew(&req, &sql_buf);
+    EXPECT_EQ(ret, 0);
+
+    IcebergToSQLFreeBuf(&sql_buf);
 }

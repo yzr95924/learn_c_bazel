@@ -11,6 +11,15 @@
 
 #include "iceberg_to_sql.h"
 
+static const char iceberg_server_config_tmpl_str[] =
+    "{\"type\":\"%s\",\"warehouse\":\"%s\"}";
+
+static const char create_tbl_req_tmpl_str[] =
+    "select attach_formation_table('%s', '%s', '%s', '%s/%s');";
+
+static const char del_tbl_req_tmpl_str[] =
+    "select detach_formation_table('%s', '%s');";
+
 typedef struct {
     const char *col_name;
     const char *col_type;
@@ -67,7 +76,7 @@ static int32_t ParseFieldsArr(const cJSON *schema_fields, SQLColDef *sql_col_arr
 
 int32_t IcebergToSQLCreateTblSQL(const LCSCreateTblReq *req, uint8_t **sql_buf)
 {
-    UNUSED_PARAM(sql_buf)
+    UNUSED_PARAM(sql_buf);
     int32_t col_cnt = 0;
     const cJSON *body = req->body;
     LOG(INFO) << "convert Iceberg to SQL";
@@ -90,8 +99,97 @@ int32_t IcebergToSQLCreateTblSQL(const LCSCreateTblReq *req, uint8_t **sql_buf)
     return 0;
 }
 
+static int32_t CheckCreateTblReqIsValid(const LCSCreateTblReq *req)
+{
+    if (req == NULL) {
+        LOG(ERROR) << "req is NULL";
+        return EINVAL;
+    }
+    return 0;
+}
+
+int32_t IcebergToSQLCreateTblSQLNew(const LCSCreateTblReq *req, uint8_t **sql_buf)
+{
+    UNUSED_PARAM(create_tbl_req_tmpl_str);
+    UNUSED_PARAM(sql_buf);
+    int32_t ret = 0;
+    ret = CheckCreateTblReqIsValid(req);
+    if (ret != 0) {
+        LOG(ERROR) << "check create table req failed";
+        return ret;
+    }
+
+    int32_t target_config_str_len = snprintf(NULL, 0,
+        iceberg_server_config_tmpl_str, req->connConfig.type,
+        req->connConfig.warehouse_name);
+    uint8_t *config_str = NULL;
+    config_str = (uint8_t *)malloc(target_config_str_len + 1);
+    if (config_str == NULL) {
+        LOG(ERROR) << "alloc config_str failed";
+        return ENOMEM;
+    }
+    ret = snprintf((char *)(config_str), target_config_str_len + 1,
+        iceberg_server_config_tmpl_str, req->connConfig.type,
+        req->connConfig.warehouse_name);
+    if (ret != target_config_str_len) {
+        LOG(ERROR) << "generate config str failed";
+        free(config_str);
+        return EPIPE;
+    }
+    LOG(INFO) << "generate config str: " << config_str;
+
+    int32_t target_sql_str_len = snprintf(NULL, 0, create_tbl_req_tmpl_str,
+        req->ns_name,
+        req->tbl_name,
+        config_str,
+        req->ns_name,
+        req->tbl_name);
+    *sql_buf = (uint8_t *)malloc(target_sql_str_len + 1);
+    if (*sql_buf == NULL) {
+        LOG(ERROR) << "alloc sql_buf failed";
+        return ENOMEM;
+    }
+    ret = snprintf((char *)(*sql_buf), target_sql_str_len + 1,
+        create_tbl_req_tmpl_str,
+        req->ns_name,
+        req->tbl_name,
+        config_str,
+        req->ns_name,
+        req->tbl_name);
+    if (ret != target_sql_str_len) {
+        LOG(ERROR) << "generate sql str failed";
+        free(config_str);
+        free(sql_buf);
+        return EPIPE;
+    }
+    LOG(INFO) << "generate create tbl sql: " << (char *)(*sql_buf);
+    free(config_str);
+    return 0;
+}
+
+int32_t IcebergToSQLDelTblSQLNew(const LCSDelTblReq *req, uint8_t **sql_buf)
+{
+    int32_t ret = 0;
+    int32_t target_str_len = snprintf(NULL, 0, del_tbl_req_tmpl_str, req->ns_name, req->tbl_name);
+    *sql_buf = (uint8_t *)malloc(target_str_len + 1);
+    if (*sql_buf == NULL) {
+        LOG(ERROR) << "alloc sql_buf failed";
+        return ENOMEM;
+    }
+    ret = snprintf((char *)(*sql_buf), target_str_len + 1, del_tbl_req_tmpl_str,
+        req->ns_name, req->tbl_name);
+    if (ret != target_str_len) {
+        LOG(ERROR) << "generate del sql str failed";
+        free(*sql_buf);
+        return EPIPE;
+    }
+    LOG(INFO) << "generate del tbl sql: " << (char *)(*sql_buf);
+    return 0;
+}
+
 void IcebergToSQLFreeBuf(uint8_t **sql_buf)
 {
-    UNUSED_PARAM(sql_buf)
+    free(*sql_buf);
+    *sql_buf = NULL;
     return;
 }

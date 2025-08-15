@@ -17,7 +17,7 @@
 #include <error.h>
 
 #ifndef UNUSED_PARAM(x)
-#define UNUSED_PARAM(x) (void)(x);
+#define UNUSED_PARAM(x) (void)(x)
 #endif
 
 #define MAX_NS_NAME_LEN 64

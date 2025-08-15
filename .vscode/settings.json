@@ -10,6 +10,7 @@
     ],
     "cSpell.words": [
         "colorlogtostderr",
-        "colorlogtostdout"
+        "colorlogtostdout",
+        "tmpl"
     ],
 }
