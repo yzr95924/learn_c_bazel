@@ -17,6 +17,8 @@ constexpr const char *k_ns_name = "ns1";
 constexpr const char *k_tbl_name = "my_table";
 constexpr const char *k_warehouse_type = "local";
 constexpr const char *k_warehouse_path = "/tmp/iceberg_warehouse";
+constexpr const char *k_test_str_1 = "test_1";
+constexpr const char *k_test_str_2 = "test_2";
 
 class IcebergToSQLTest : public testing::Test {
     protected:
@@ -115,4 +117,10 @@ TEST_F(IcebergToSQLTest, IcebergToSQLCreateTblSQLNew_NORMAL)
     EXPECT_EQ(ret, 0);
 
     IcebergToSQLFreeBuf(&sql_buf);
+
+    const char *test_str = NULL;
+    test_str = k_test_str_1;
+    LOG(INFO) << test_str;
+    test_str = k_test_str_2;
+    LOG(INFO) << test_str;
 }

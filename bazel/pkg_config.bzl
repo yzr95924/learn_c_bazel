@@ -1,4 +1,5 @@
 """ https://github.com/RobotLocomotion/drake/blob/master/tools/workspace/pkg_config.bzl """
+
 load("//bazel:defs.bzl", "path", "which")
 
 _DEFAULT_TEMPLATE = Label("//bazel:pkg_config.BUILD.tpl")
@@ -203,7 +204,7 @@ def _maybe_setup_pkg_config_repository(repository_ctx):
             # We know these are okay to ignore.
             pass
         else:
-            unknown_cflags += [cflag]
+            unknown_cflags.append(cflag)
     if unknown_cflags:
         print("pkg-config of {} returned flags that we will ignore: {}".format(
             repository_ctx.attr.modname,
@@ -226,7 +227,7 @@ def _maybe_setup_pkg_config_repository(repository_ctx):
             repository_ctx.path(item),
             hdrs_path.get_child(symlink_dest),
         )
-        includes += ["include/" + symlink_dest]
+        includes.append("include/" + symlink_dest)
     hdrs_prologue = "glob([\"include/**\"], allow_empty = True) + "
 
     extra_deprecation = getattr(
@@ -366,8 +367,7 @@ pkg_config_repo_rule = repository_rule(
 )
 
 def pkg_config_repository(**kwargs):
-    """Creates a repository that contains a single library target, based on the
-    results of invoking pkg-config.
+    """Creates a repository that contains a single library target based on pkg-config results.
 
     The pkg_config_repository flavor of this rule is intended to be called
     directly from the WORKSPACE file, or from a macro that was called by the
@@ -390,38 +390,38 @@ def pkg_config_repository(**kwargs):
             )
 
     Args:
-        name: A unique name for this rule.
+        **kwargs: Keyword arguments passed to the underlying repository rule.
+                  Supported arguments include:
 
-        licenses: Licenses of the library. Valid license types include
-                  restricted, reciprocal, notice, permissive, and
-                  unencumbered. See
-                  https://docs.bazel.build/versions/master/be/functions.html#licenses_args
-                  for more information.
-
-        modname: The library name as known to pkg-config.
-        atleast_version: (Optional) The --atleast-version to pkg-config.
-        static: (Optional) Add linkopts for static linking to the library
-                target.
-        build_file_template: (Optional) (Advanced) Override the BUILD template.
-        extra_srcs: (Optional) Extra items to add to the library target.
-        extra_hdrs: (Optional) Extra items to add to the library target.
-        extra_copts: (Optional) Extra items to add to the library target.
-        extra_defines: (Optional) Extra items to add to the library target.
-        extra_includes: (Optional) Extra items to add to the library target.
-        extra_linkopts: (Optional) Extra items to add to the library target.
-        extra_deps: (Optional) Extra items to add to the library target.
-        build_epilog: (Optional) Extra text to add to the generated
-                      BUILD.bazel.
-        pkg_config_paths: (Optional) Paths to find pkg-config files (.pc). Note
-                          that we ignore the environment variable
-                          PKG_CONFIG_PATH set by the user.
-        extra_deprecation: (Optional) Add a deprecation message to the library
-                           BUILD target.
-        defer_error_os_names: (Optional) On these operating systems (as named
-                              by repository_ctx.os.name), failure to find the
-                              *.pc file will yield a link-time error, not a
-                              fetch-time error. This is useful for externals
-                              that are guarded by select() statements.
+                  name: A unique name for this rule.
+                  licenses: Licenses of the library. Valid license types include
+                            restricted, reciprocal, notice, permissive, and
+                            unencumbered. See
+                            https://docs.bazel.build/versions/master/be/functions.html#licenses_args
+                            for more information.
+                  modname: The library name as known to pkg-config.
+                  atleast_version: (Optional) The --atleast-version to pkg-config.
+                  static: (Optional) Add linkopts for static linking to the library
+                          target.
+                  build_file_template: (Optional) (Advanced) Override the BUILD template.
+                  extra_srcs: (Optional) Extra items to add to the library target.
+                  extra_hdrs: (Optional) Extra items to add to the library target.
+                  extra_copts: (Optional) Extra items to add to the library target.
+                  extra_defines: (Optional) Extra items to add to the library target.
+                  extra_includes: (Optional) Extra items to add to the library target.
+                  extra_linkopts: (Optional) Extra items to add to the library target.
+                  extra_deps: (Optional) Extra items to add to the library target.
+                  build_epilog: (Optional) Extra text to add to the generated BUILD.bazel.
+                  pkg_config_paths: (Optional) Paths to find pkg-config files (.pc). Note
+                                    that we ignore the environment variable
+                                    PKG_CONFIG_PATH set by the user.
+                  extra_deprecation: (Optional) Add a deprecation message to the library
+                                     BUILD target.
+                  defer_error_os_names: (Optional) On these operating systems (as named
+                                        by repository_ctx.os.name), failure to find the
+                                        *.pc file will yield a link-time error, not a
+                                        fetch-time error. This is useful for externals
+                                        that are guarded by select() statements.
     """
     if "deprecation" in kwargs:
         fail("When calling pkg_config_repository, don't use deprecation=str " +

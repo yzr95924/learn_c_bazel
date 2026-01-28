@@ -83,7 +83,7 @@ GLOBAL_DEFAULT_COPTS = DEFAULT_WARNING_FLAGS + select({
     "@platforms//os:windows": ["-D_WINDOWS"],
     "//conditions:default": []
 }) + [
-    "-std=c++14",
+    "-std=c++17",
     "-fPIC",
     # "-fPIE",
 ]
