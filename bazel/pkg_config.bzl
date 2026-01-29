@@ -338,7 +338,7 @@ pkg_config_repo_rule = repository_rule(
     # dependencies to be linked and their licenses must also be enumerated.
     implementation = _impl,
     attrs = {
-        "licenses": attr.string_list(),
+        # "licenses": attr.string_list(),
         "modname": attr.string(
             mandatory = True,
         ),

@@ -1,10 +1,9 @@
 # common options
 common --enable_bzlmod # Enable Bzlmod for every Bazel command
-
 # registry, default BCR
 build --registry=https://bcr.bazel.build # BCR
 
 # common for c++
-build --action_env=CXX=clang++
-build --action_env=CC=clang
+build --repo_env=CXX=clang++
+build --repo_env=CC=clang
 build --linkopt=-fuse-ld=lld # for llvm

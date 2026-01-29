@@ -5,7 +5,6 @@ package(default_visibility = ["//visibility:public"])
 cc_test(
     name = "ut_main",
     deps = [
-        "//ut/rest_server_ut:rest_demo_ut",
         "//ut/iceberg_to_sql_ut:iceberg_to_sql_ut",
         "@com_googletest//:gtest_main", # for gtest main entry
     ],
