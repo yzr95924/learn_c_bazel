@@ -1,0 +1,14 @@
+module(
+    name = "bazel_buildframe"
+)
+
+# bazel_dep(
+#     name = "platforms",
+#     version = "1.0.0",
+#     repo_name = "platforms"
+# )
+# bazel_dep(
+#     name = "rules_cc",
+#     version = "0.2.14",
+#     repo_name = "rules_cc"
+# )

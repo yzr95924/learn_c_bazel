@@ -1,16 +1,32 @@
 """
 定义工程内通用的变量
 """
-def debug_print_var(var_name, var_value):
-    print("[MY_DEBUG]: %s: %s" % (var_name, var_value))
 
-def path(repository_ctx, additional_search_paths = []):
-    """One-line summary of what this function does.
+# 参考： https://github.com/RobotLocomotion/drake/blob/master/tools/workspace/execute.bzl
+def homebrew_prefix( repository_ctx):
+    """Returns the prefix where Homebrew is expected to be found.
 
-    Longer description if needed.
+    Fails when called on a non-macOS platform.
 
     Args:
-      repository_ctx: The repository context object used to access build
+       repository_ctx: The repository context object used to access build
+        environment information.
+
+    Returns:
+      A string representing the Homebrew prefix path.
+    """
+    if  repository_ctx.os.name != "mac os x":
+        fail("Not a homebrew OS: " +  repository_ctx.os.name)
+    if  repository_ctx.os.arch == "x86_64":
+        return "/usr/local"
+    else:
+        return "/opt/homebrew"
+
+def path( repository_ctx, additional_search_paths = []):
+    """One-line summary of what this function does.
+
+    Args:
+       repository_ctx: The repository context object used to access build
         environment information and execute commands.
       additional_search_paths: List of additional paths to search for
         dependencies or resources.
@@ -22,9 +38,12 @@ def path(repository_ctx, additional_search_paths = []):
 
     # N.B. Ensure ${PATH} in each platform `tools/*.bazelrc` matches these
     # paths.
+    if  repository_ctx.os.name == "mac os x":
+        search_paths = search_paths + [homebrew_prefix( repository_ctx) + "/bin"]
     search_paths = search_paths + ["/usr/bin", "/bin"]
+    if  repository_ctx.os.name == "mac os x":
+        search_paths = search_paths + ["/usr/sbin", "/sbin"]
     final_paths = ":".join(search_paths)
-    print("[MY_DEBUG]: path for which(): %s" % final_paths)
     return final_paths
 
 def which(repository_ctx, program, additional_search_paths = []):
@@ -42,8 +61,10 @@ def which(repository_ctx, program, additional_search_paths = []):
     Returns:
       The path to the program, or None if not found.
     """
+    final_path = path(repository_ctx, additional_search_paths)
+    print("[MY_DEBUG]: search path: %s" % final_path)
     exec_result = repository_ctx.execute(["which", program], environment = {
-        "PATH": path(repository_ctx, additional_search_paths),
+        "PATH": final_path,
     })
     if exec_result.return_code != 0:
         return None # not found

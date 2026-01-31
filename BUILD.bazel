@@ -1,15 +1,19 @@
+package(
+    default_visibility = ["//visibility:public"],
+)
+
 config_setting(
     name = "debug_mode",
     values = {
         "compilation_mode": "dbg",
-    }
+    },
 )
 
 config_setting(
     name = "release_mode",
     values = {
         "compilation_mode": "opt",
-    }
+    },
 )
 
 # switch of using asan
@@ -17,7 +21,7 @@ config_setting(
     name = "use_asan",
     values = {
         "define": "use_asan=true",
-    }
+    },
 )
 
 # switch of using termux
@@ -25,13 +29,13 @@ config_setting(
     name = "use_termux",
     values = {
         "define": "use_termux=true",
-    }
+    },
 )
 
-platform(
+config_setting(
     name = "linux_x86_64",
     constraint_values = [
         "@platforms//os:linux",
         "@platforms//cpu:x86_64",
-    ]
+    ],
 )

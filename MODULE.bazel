@@ -1,6 +1,7 @@
 """
 learn_c_bazel main bzlmod file
 """
+
 module(
     name = "learn_c_bazel",
     version = "0.0.1",
@@ -8,33 +9,56 @@ module(
 
 #### local module ####
 # my buildframe
-bazel_dep(name = "my_buildframe", repo_name = "my_buildframe")
+bazel_dep(name = "bazel_buildframe", repo_name = "local_bazel_buildframe")
 local_path_override(
-    module_name = "my_buildframe",
-    path = "./bazel"
+    module_name = "bazel_buildframe",
+    path = "./bazel_buildframe",
 )
 
 # extern module
 # bazel build tool
-bazel_dep(name = "platforms", version = "1.0.0", repo_name = "platforms")
-bazel_dep(name = "rules_cc", version = "0.2.14", repo_name = "rules_cc")
-bazel_dep(name = "rules_foreign_cc", version = "0.15.0", repo_name = "rules_foreign_cc")
+bazel_dep(
+    name = "platforms",
+    version = "1.0.0",
+    repo_name = "platforms",
+)
+bazel_dep(
+    name = "rules_cc",
+    version = "0.2.14",
+    repo_name = "rules_cc",
+)
 
 # google suit
 # The `repo_name` attribute allows users to reference this dependency via the `com_glog` repo name.
-bazel_dep(name = "glog", version = "0.7.1", repo_name = "com_glog")
-bazel_dep(name = "googletest", version = "1.17.0.bcr.2", repo_name = "com_googletest")
-bazel_dep(name = "google_benchmark", version = "1.9.1", repo_name = "com_google_benchmark")
-
-# bazel central registry
-bazel_dep(name = "cjson",
+bazel_dep(
+    name = "glog",
+    version = "0.7.1",
+    repo_name = "com_glog",
+)
+bazel_dep(
+    name = "googletest",
+    version = "1.17.0.bcr.2",
+    repo_name = "com_googletest",
+)
+bazel_dep(
+    name = "google_benchmark",
+    version = "1.9.1",
+    repo_name = "com_google_benchmark",
+)
+bazel_dep(
+    name = "cjson",
     version = "1.7.19-0.20240923110858-12c4bf1986c2.bcr.3",
-    repo_name = "com_cjson")
-bazel_dep(name = "liburing", version = "2.10", repo_name = "com_liburing")
+    repo_name = "com_cjson",
+)
+bazel_dep(
+    name = "liburing",
+    version = "2.10",
+    repo_name = "com_liburing",
+)
 
 # local lib
-pkg_config_repo_rule = use_repo_rule("//bazel:pkg_config.bzl", "pkg_config_repo_rule")
-pkg_config_repo_rule(
+pkg_config_repository_rule = use_repo_rule("@local_bazel_buildframe//:pkg_config.bzl", "pkg_config_repository_rule")
+pkg_config_repository_rule(
     name = "libpq",
     modname = "libpq",
 )

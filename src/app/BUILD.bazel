@@ -1,4 +1,4 @@
-load("@my_buildframe//:copts.bzl", "GLOBAL_DEFAULT_COPTS", "GLOBAL_LINK_OPTS")
+load("@local_bazel_buildframe//:copts.bzl", "GLOBAL_DEFAULT_COPTS", "GLOBAL_DEFAULT_LINK_OPTS")
 load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
 
 cc_binary(
@@ -10,6 +10,6 @@ cc_binary(
         "//src/pg_client:pg_client",
     ],
     copts = GLOBAL_DEFAULT_COPTS,
-    linkopts = GLOBAL_LINK_OPTS,
+    linkopts = GLOBAL_DEFAULT_LINK_OPTS,
     linkstatic = True,
 )
