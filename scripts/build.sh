@@ -2,7 +2,7 @@
 bazel clean
 bazel build --compilation_mode=dbg \
     --define=use_asan=true \
-    @learn_c_bazel//src/app:MQSim \
+    @learn_c_bazel//src/...\
     --explain=build.log \
     --subcommands=pretty_print \
     --verbose_failures

@@ -38,17 +38,14 @@ ASAN_LINK_OPTS = [
 ]
 
 GLOBAL_DEFAULT_LINK_OPTS = select({
-    "//:use_asan": ASAN_LINK_OPTS,
-    "//conditions:default": [],
-}) + select({
     "//:debug_mode": [
         "-g",
         "-O0",
-        "-Wl,--export-dynamic", # 导出所有动态符号，便于lldb/gdb调试
+        "-Wl,--export-dynamic",  # 导出所有动态符号，便于lldb/gdb调试
         "-Wl,--build-id=sha1",  # 生成唯一构建ID，方便定位调试符号文件
     ],
     "//:release_mode": [
-        "-Wl,--strip-debug",    # 仅剥离调试符号（保留基础符号，推荐）
+        "-Wl,--strip-debug",  # 仅剥离调试符号（保留基础符号，推荐）
     ],
     "//conditions:default": [
         "-Wl,-z,relro,-z,now",  # 保留基础安全选项
@@ -56,21 +53,24 @@ GLOBAL_DEFAULT_LINK_OPTS = select({
 }) + select({
     "//:use_termux": ["-llog"],
     "//conditions:default": [],
+}) + select({
+    "//:use_asan": ASAN_LINK_OPTS,
+    "//conditions:default": [],
 }) + [
     "-Wl,-Bsymbolic",
     "-fPIC",
 ]
 
 GLOBAL_DEFAULT_COPTS = DEFAULT_WARNING_FLAGS + select({
-    "//:use_asan": ASAN_COPTS,
-    "//conditions:default": [],
-}) + select({
     "//:debug_mode": ["-g", "-O0"],
     "//:release_mode": ["-O3", "-DNDEBUG", "-D_MY_DEBUG"],
     "//conditions:default": [],
 }) + select({
     "@platforms//os:linux": ["-D_LINUX"],
     "@platforms//os:windows": ["-D_WINDOWS"],
+    "//conditions:default": [],
+}) + select({
+    "//:use_asan": ASAN_COPTS,
     "//conditions:default": [],
 }) + [
     "-std=c++17",

@@ -63,6 +63,7 @@ def _maybe_setup_pkg_config_repository(repository_ctx):
     # name (e.g., "eigen") so that when a BUILD file uses a label which omits
     # the target name (e.g., deps = ["@eigen"]) the unabbreviated label (e.g.,
     # "@eigen//:eigen") will match what we provide here.
+    print("[MY_DEBUG]: repository_ctx.name: {}".format(repository_ctx.name))
     library_name = repository_ctx.name.split("+")[-1]
 
     # Check if we can find the required *.pc file of any version.

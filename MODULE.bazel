@@ -58,7 +58,8 @@ bazel_dep(
 
 # local lib
 pkg_config_repository_rule = use_repo_rule("@local_bazel_buildframe//:pkg_config.bzl", "pkg_config_repository_rule")
+
 pkg_config_repository_rule(
-    name = "libpq",
+    name = "local_libpq",
     modname = "libpq",
 )

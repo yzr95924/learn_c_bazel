@@ -16,6 +16,8 @@
 #include <stdio.h>
 #include <error.h>
 
+#include "glog/logging.h"
+
 #ifndef UNUSED_PARAM(x)
 #define UNUSED_PARAM(x) (void)(x)
 #endif

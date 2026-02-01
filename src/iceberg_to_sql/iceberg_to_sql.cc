@@ -10,6 +10,7 @@
  */
 
 #include "iceberg_to_sql.h"
+#include "pg_client.h"
 
 static const char iceberg_server_config_tmpl_str[] =
     "{\"type\":\"%s\",\"warehouse\":\"%s\"}";
@@ -92,7 +93,7 @@ int32_t IcebergToSQLCreateTblSQL(const LCSCreateTblReq *req, uint8_t **sql_buf)
         return EINVAL;
     }
     col_cnt = GetFieldCnt(schema_fields);
-    SQLColDef *col_def_arr = (SQLColDef*)malloc(sizeof(SQLColDef) * col_cnt);
+    SQLColDef *col_def_arr = (SQLColDef*)malloc(sizeof(SQLColDef) * (size_t)col_cnt);
 
     ParseFieldsArr(schema_fields, col_def_arr);
     free(col_def_arr);
@@ -123,12 +124,12 @@ int32_t IcebergToSQLCreateTblSQLNew(const LCSCreateTblReq *req, uint8_t **sql_bu
         iceberg_server_config_tmpl_str, req->connConfig.type,
         req->connConfig.warehouse_name);
     uint8_t *config_str = NULL;
-    config_str = (uint8_t *)malloc(target_config_str_len + 1);
+    config_str = (uint8_t *)malloc((size_t)target_config_str_len + 1);
     if (config_str == NULL) {
         LOG(ERROR) << "alloc config_str failed";
         return ENOMEM;
     }
-    ret = snprintf((char *)(config_str), target_config_str_len + 1,
+    ret = snprintf((char *)(config_str), (size_t)target_config_str_len + 1,
         iceberg_server_config_tmpl_str, req->connConfig.type,
         req->connConfig.warehouse_name);
     if (ret != target_config_str_len) {
@@ -144,12 +145,12 @@ int32_t IcebergToSQLCreateTblSQLNew(const LCSCreateTblReq *req, uint8_t **sql_bu
         config_str,
         req->ns_name,
         req->tbl_name);
-    *sql_buf = (uint8_t *)malloc(target_sql_str_len + 1);
+    *sql_buf = (uint8_t *)malloc((size_t)target_sql_str_len + 1);
     if (*sql_buf == NULL) {
         LOG(ERROR) << "alloc sql_buf failed";
         return ENOMEM;
     }
-    ret = snprintf((char *)(*sql_buf), target_sql_str_len + 1,
+    ret = snprintf((char *)(*sql_buf), (size_t)target_sql_str_len + 1,
         create_tbl_req_tmpl_str,
         req->ns_name,
         req->tbl_name,
@@ -171,12 +172,12 @@ int32_t IcebergToSQLDelTblSQLNew(const LCSDelTblReq *req, uint8_t **sql_buf)
 {
     int32_t ret = 0;
     int32_t target_str_len = snprintf(NULL, 0, del_tbl_req_tmpl_str, req->ns_name, req->tbl_name);
-    *sql_buf = (uint8_t *)malloc(target_str_len + 1);
+    *sql_buf = (uint8_t *)malloc((size_t)target_str_len + 1);
     if (*sql_buf == NULL) {
         LOG(ERROR) << "alloc sql_buf failed";
         return ENOMEM;
     }
-    ret = snprintf((char *)(*sql_buf), target_str_len + 1, del_tbl_req_tmpl_str,
+    ret = snprintf((char *)(*sql_buf), (size_t)target_str_len + 1, del_tbl_req_tmpl_str,
         req->ns_name, req->tbl_name);
     if (ret != target_str_len) {
         LOG(ERROR) << "generate del sql str failed";

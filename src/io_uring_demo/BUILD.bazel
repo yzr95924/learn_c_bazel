@@ -1,22 +1,27 @@
 load("@local_bazel_buildframe//:copts.bzl", "GLOBAL_DEFAULT_COPTS")
-load("@rules_cc//cc:cc_library.bzl", "cc_library")
-package(default_visibility = ["//visibility:public"])
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+package(
+    default_visibility = ["//visibility:private"],
+)
 
 cc_library(
     name = "io_uring_demo",
     srcs = glob([
         "*.cc",
+        "*.h",
     ]),
     hdrs = [
     ],
+    copts = GLOBAL_DEFAULT_COPTS,
     includes = [
         ".",
     ],
-    deps = [
-        "@com_liburing//:liburing",
-        "@com_glog//:glog",
-        "//src/include:inner_include",
-    ],
-    copts = GLOBAL_DEFAULT_COPTS,
     linkopts = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/include:inner_include",
+        "@com_glog//:glog",
+        "@com_liburing//:liburing",
+    ],
 )

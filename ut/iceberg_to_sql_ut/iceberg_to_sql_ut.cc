@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "iceberg_to_sql.h"
 
-constexpr const char *kTestName = "IcebergToSQLTest";
 constexpr const char *k_ns_name = "ns1";
 constexpr const char *k_tbl_name = "my_table";
 constexpr const char *k_warehouse_type = "local";
@@ -34,17 +33,11 @@ class IcebergToSQLTest : public testing::Test {
 
         static void SetUpTestSuite() {
             // run for the whole test class
-            google::InitGoogleLogging(kTestName);
-            FLAGS_logtostderr = true;
-            FLAGS_colorlogtostderr = true;
-            FLAGS_colorlogtostdout = true;
-            FLAGS_minloglevel = -1;  // 启用所有 DEBUG 日志（级别设为 -1）
             return;
         }
 
         static void TearDownTestSuite() {
             // run for the whole test class
-            google::ShutdownGoogleLogging();
             return;
         }
 };
@@ -67,7 +60,7 @@ TEST_F(IcebergToSQLTest, IcebergToSQLCreateTblSQL_NORMAL)
     }
     LOG(INFO) << "open json file done";
     fseek(json_fd, 0, SEEK_END);
-    json_file_size = ftell(json_fd);
+    json_file_size = (uint64_t)ftell(json_fd);
     fseek(json_fd, 0, SEEK_SET);
 
     json_data_str_buf = (uint8_t*)malloc(json_file_size + 1);

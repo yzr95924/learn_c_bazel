@@ -6,6 +6,6 @@ bazel build --compilation_mode=dbg \
 	--explain=test.log \
 	--subcommands=pretty_print
 
-python3 ./scripts/generate_compile_commands.py \
-    -o \"--compilation_mode=dbg\" \
-    -t //ut:ut_main
+# python3 ./scripts/generate_compile_commands.py \
+    # -o \"--compilation_mode=dbg\" \
+    # -t //ut:ut_main
