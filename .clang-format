@@ -1,0 +1,36 @@
+---
+Language:       Cpp                 # 指定格式化的目标编程语言为C++（Cpp是C++的缩写）
+BasedOnStyle:   Google              # 使用Google风格
+BreakBeforeBraces:  Linux           # 遵循Linux风格，所有左大括号单独换行
+TabWidth:        4                  # 指定单个Tab字符对应的空格数为4个
+UseTab:          Never              # 强制格式化后的代码完全不使用Tab字符
+IndentWidth:     4                  # 指定每次缩进的基础宽度为4个空格
+
+# 指针和reference风格
+PointerAlignment: Right             # 指针和reference靠近变量
+DerivePointerAlignment: false       # 关闭自动推导，防止不确定性
+
+# 换行与行宽控制
+ColumnLimit:    120                 # 列宽120
+BreakBeforeBinaryOperators: None    # 二元运算符（+/-/*/= 等）不强制换行
+BreakStringLiterals: 'true'         # 长字符串自动拆分为多行
+ContinuationIndentWidth: '4'        # 换行后的补充缩进
+
+# “短代码” 格式控制
+AllowAllParametersOfDeclarationOnNextLine: 'true' # 函数声明参数可全部放至下一行
+
+# 空格控制
+SpaceBeforeAssignmentOperators: 'true'  # 赋值运算符（=/+=$等）前加空格
+SpaceBeforeParens: ControlStatements    # 仅控制语句（if/for/while等）括号前加空格
+SpacesInAngles: 'false'                 # 模板尖括号<>内不加空格
+SpacesBeforeTrailingComments: '1'       # 行尾注释前加 1 个空格
+SpacesInSquareBrackets: 'false'         # 方括号[]内不加空格
+SpacesInContainerLiterals: 'false'      # 容器字面量{}内不加多余空格
+
+# 注释和头文件控制
+ReflowComments: 'true'              # 自动重排注释内容，适配行宽限制
+SortIncludes: 'true'                # 按Google规则：先系统头文件（<>），后项目头文件（""），各自按字母序排列
+
+# 空行控制
+MaxEmptyLinesToKeep: 1              # 全局连续空行数量
+...

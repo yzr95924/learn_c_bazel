@@ -1,0 +1,25 @@
+load("@local_bazel_buildframe//:copts.bzl", "GLOBAL_DEFAULT_COPTS", "GLOBAL_DEFAULT_LINK_OPTS")
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+package(
+    default_visibility = ["//visibility:private"],
+)
+
+cc_library(
+    name = "linux_os_util",
+    srcs = glob([
+        "*.cc",
+        "*.h",
+    ]),
+    hdrs = [],
+    copts = GLOBAL_DEFAULT_COPTS,
+    includes = [
+        ".",
+    ],
+    linkopts = ["-lpthread"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/include:inner_include",
+    ],
+    alwayslink = True,
+)

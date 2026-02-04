@@ -14,7 +14,6 @@
 
 #include "common_util.h"
 #include "liburing.h"
-#include "glog/logging.h"
 
 int32_t io_uring_demo_run();
 

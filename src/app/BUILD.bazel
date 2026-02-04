@@ -15,5 +15,6 @@ cc_binary(
     visibility = ["//visibility:public"],
     deps = [
         "//src/pg_client",
+        "//src/linux_os_util"
     ],
 )
