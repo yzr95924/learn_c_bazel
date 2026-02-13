@@ -33,4 +33,8 @@ SortIncludes: 'true'                # 按Google规则：先系统头文件（<>�
 
 # 空行控制
 MaxEmptyLinesToKeep: 1              # 全局连续空行数量
+
+# 括号控制
+; BraceWrapping:
+;   AfterClass: false         # 类定义后不换行
 ...

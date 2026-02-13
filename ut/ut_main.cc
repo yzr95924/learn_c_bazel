@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     FLAGS_logtostderr = true;
     FLAGS_colorlogtostderr = true;
     FLAGS_colorlogtostdout = true;
-    FLAGS_minloglevel = -1;  // 启用所有 DEBUG 日志（级别设为 -1）
+    FLAGS_minloglevel = -1; // 启用所有 DEBUG 日志（级别设为 -1）
 
     int32_t ret = RUN_ALL_TESTS();
 

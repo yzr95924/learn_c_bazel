@@ -103,15 +103,16 @@ def replace_bazel_exec_path(json_path) -> int:
         logging.error("get bazel execution_root failed")
         return -1
     bazel_exec_root_path = ret_val.stdout.strip()
-    bazel_workspace_path = _get_current_bazel_workspace()
+    logical_workspace_name = "bazel-" + os.path.basename(_get_current_bazel_workspace())
+    final_workspace_path = os.path.join(_get_current_bazel_workspace(), logical_workspace_name)
 
     logging.info("replace %s with %s", bazel_exec_root_path,
-                 bazel_workspace_path)
+                 final_workspace_path)
     try:
         with open(json_path, "r", encoding="utf-8") as json_file:
             json_data = json_file.read()
             new_json_data = json_data.replace(bazel_exec_root_path,
-                                              bazel_workspace_path)
+                                              final_workspace_path)
 
         with open(json_path, "w", encoding="utf-8") as json_file:
             json_file.write(new_json_data)

@@ -12,15 +12,15 @@
 #ifndef LEARN_C_BAZEL_ICEBERG_TO_SQL
 #define LEARN_C_BAZEL_ICEBERG_TO_SQL
 
-#include "common_util.h"
-
-#include "glog/logging.h"
 #include "cJSON.h"
+#include "common_util.h"
+#include "glog/logging.h"
 
 #define MAX_ICEBERG_TYPE_NAME_LEN 20
 #define MAX_ICEBERG_WAREHOUSE_NAME_LEN 30
 
-// select attach_formation_table('testing','sift1w','{"type":"local","warehouse":"/tmp/iceberg_warehouse"}','testing/sift1w');
+// select
+// attach_formation_table('testing','sift1w','{"type":"local","warehouse":"/tmp/iceberg_warehouse"}','testing/sift1w');
 // select detach_formation_table('testing','sift1w');
 
 typedef struct {
@@ -39,7 +39,6 @@ typedef struct {
     char ns_name[MAX_NS_NAME_LEN];
     char tbl_name[MAX_TBL_NAME_LEN];
 } LCSDelTblReq;
-
 
 /**
  * @brief for create tbl req, convert Iceberg to SQL
