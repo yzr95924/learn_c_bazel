@@ -22,7 +22,7 @@ def homebrew_prefix( repository_ctx):
     else:
         return "/opt/homebrew"
 
-def path( repository_ctx, additional_search_paths = []):
+def path(repository_ctx, additional_search_paths = []):
     """One-line summary of what this function does.
 
     Args:
