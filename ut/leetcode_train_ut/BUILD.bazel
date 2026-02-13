@@ -1,0 +1,23 @@
+load("@local_bazel_buildframe//:copts.bzl", "GLOBAL_DEFAULT_COPTS")
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "leetcode_train_ut",
+    srcs = glob([
+        "*.cc",
+    ]),
+    copts = GLOBAL_DEFAULT_COPTS,
+    data = [
+        "//data:test_data",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/leetcode_train",
+        "@com_googletest//:gtest",
+    ],
+    alwayslink = True,
+)
