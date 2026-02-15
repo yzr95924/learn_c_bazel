@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-bazel clean
 bazel build --compilation_mode=dbg \
     --define=use_asan=true \
     @learn_c_bazel//src/...\
