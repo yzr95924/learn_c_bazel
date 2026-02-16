@@ -6,21 +6,22 @@ package(
 )
 
 cc_library(
-    name = "leetcode_train",
+    name = "leetcode_linked_list",
     srcs = glob([
         "*.cc",
         "*.h",
     ]),
-    hdrs = [
-        "leetcode_train.h",
-    ],
+    hdrs = glob([
+        "*.h",
+    ]),
     copts = GLOBAL_DEFAULT_COPTS,
     includes = [
         ".",
     ],
     linkopts = [],
-    visibility = ["//visibility:public"],
+    visibility = ["//src/leetcode_train:__subpackages__"],
     deps = [
-        "//src/leetcode_train/leetcode_linked_list",
+        "//src/include:inner_include",
+        "//src/leetcode_train/leetcode_util",
     ],
 )

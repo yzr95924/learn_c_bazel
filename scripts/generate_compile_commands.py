@@ -30,6 +30,7 @@ _G_BAZEL_COMPILE_COMMANDS_TOOL = "bazel-compile-commands"
 _G_JSON_FORMAT_TOOL = "jq"
 _G_BAZEL_BUILD_ARGS = ""
 _G_BAZEL_COMPILE_COMMANDS_ARGS = ""
+_G_BAZEL_EXTERNAL_PATH = "external"
 
 def _run_shell_cmd(cmd: str, cwd: str):
     logging.debug("run cmd in %s: %s", cwd, cmd)
@@ -103,8 +104,12 @@ def replace_bazel_exec_path(json_path) -> int:
         logging.error("get bazel execution_root failed")
         return -1
     bazel_exec_root_path = ret_val.stdout.strip()
-    logical_workspace_name = "bazel-" + os.path.basename(_get_current_bazel_workspace())
-    final_workspace_path = os.path.join(_get_current_bazel_workspace(), logical_workspace_name)
+    final_workspace_path = _get_current_bazel_workspace()
+    # create symlink to link external lib in current workspace
+    # logical_workspace_name = "bazel-" + os.path.basename(
+        # _get_current_bazel_workspace())
+    # os.symlink(os.path.join(logical_workspace_name, _G_BAZEL_EXTERNAL_PATH),
+    #            os.path.join(final_workspace_path, _G_BAZEL_EXTERNAL_PATH))
 
     logging.info("replace %s with %s", bazel_exec_root_path,
                  final_workspace_path)
