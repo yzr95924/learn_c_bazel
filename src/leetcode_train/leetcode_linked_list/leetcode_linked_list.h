@@ -18,9 +18,10 @@ struct ListNode {
     int val;
     struct ListNode *next;
 };
-
 typedef struct ListNode ListNode;
 
+// 160. 相交链表
+// https://leetcode.cn/problems/intersection-of-two-linked-lists/description/?envType=problem-list-v2&envId=2cktkvj
 struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB);
 
 #endif

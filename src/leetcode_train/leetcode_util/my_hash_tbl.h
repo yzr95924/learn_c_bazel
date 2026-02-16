@@ -164,21 +164,21 @@ typedef struct {
     char hashKey[MAX_HASH_KEY_SIZE];
     MyHashValType hashVal;
     UT_hash_handle hh;
-} My_StrHashTblItem;
+} MyStrHashTblItem;
 
-static My_StrHashTblItem **My_InitStrHashTbl()
+static MyStrHashTblItem **My_InitStrHashTbl()
 {
-    My_StrHashTblItem **hashTblPtr = (My_StrHashTblItem **)calloc(1, sizeof(My_StrHashTblItem *));
+    MyStrHashTblItem **hashTblPtr = (MyStrHashTblItem **)calloc(1, sizeof(MyStrHashTblItem *));
     *hashTblPtr = NULL;
     return hashTblPtr;
 }
 
-static void My_InsertStrHashTbl(My_StrHashTblItem **hashTblPtr, const char *key, MyHashValType *inVal)
+static void My_InsertStrHashTbl(MyStrHashTblItem **hashTblPtr, const char *key, MyHashValType *inVal)
 {
-    My_StrHashTblItem *tmpHashItem = NULL;
+    MyStrHashTblItem *tmpHashItem = NULL;
     HASH_FIND_STR(*hashTblPtr, key, tmpHashItem);
     if (tmpHashItem == NULL) {
-        tmpHashItem = (My_StrHashTblItem *)calloc(1, sizeof(My_StrHashTblItem));
+        tmpHashItem = (MyStrHashTblItem *)calloc(1, sizeof(MyStrHashTblItem));
         strcpy(tmpHashItem->hashKey, key);
         HASH_ADD_STR(*hashTblPtr, hashKey, tmpHashItem);
     }
@@ -186,9 +186,9 @@ static void My_InsertStrHashTbl(My_StrHashTblItem **hashTblPtr, const char *key,
     return;
 }
 
-static bool My_FindStrHashTbl(My_StrHashTblItem **hashTblPtr, const char *key, My_StrHashTblItem **ret)
+static bool My_FindStrHashTbl(MyStrHashTblItem **hashTblPtr, const char *key, MyStrHashTblItem **ret)
 {
-    My_StrHashTblItem *tmpHashItem = NULL;
+    MyStrHashTblItem *tmpHashItem = NULL;
     HASH_FIND_STR(*hashTblPtr, key, tmpHashItem);
     if (tmpHashItem == NULL) {
         *ret = NULL;
@@ -199,17 +199,17 @@ static bool My_FindStrHashTbl(My_StrHashTblItem **hashTblPtr, const char *key, M
     return true;
 }
 
-static void My_DelStrHashTbl(My_StrHashTblItem **hashTblPtr, My_StrHashTblItem *hashItem)
+static void My_DelStrHashTbl(MyStrHashTblItem **hashTblPtr, MyStrHashTblItem *hashItem)
 {
     HASH_DEL(*hashTblPtr, hashItem);
     free(hashItem);
     return;
 }
 
-static void My_FreeStrHashTbl(My_StrHashTblItem **hashTblPtr)
+static void My_FreeStrHashTbl(MyStrHashTblItem **hashTblPtr)
 {
-    My_StrHashTblItem *curItem;
-    My_StrHashTblItem *tmpItem;
+    MyStrHashTblItem *curItem;
+    MyStrHashTblItem *tmpItem;
 
     HASH_ITER(hh, *hashTblPtr, curItem, tmpItem)
     {
