@@ -35,6 +35,14 @@ struct ListNode *mergeKLists(struct ListNode **lists, int listsSize);
 // https://leetcode.cn/problems/linked-list-cycle/description/
 bool hasCycle(struct ListNode *head);
 
+// 142. 环形链表 II
+// https://leetcode.cn/problems/linked-list-cycle-ii/description/
+struct ListNode *detectCycle(struct ListNode *head);
+
+// 148. 排序链表
+// https://leetcode.cn/problems/sort-list/description/
+struct ListNode *sortList(struct ListNode *head);
+
 // 160. 相交链表
 // https://leetcode.cn/problems/intersection-of-two-linked-lists/description
 struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB);

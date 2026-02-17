@@ -1,7 +1,7 @@
 /**
- * @file 141_has_cycle.cc
+ * @file 142_detect_cycle.cc
  * @author Zuoru YANG (zryang@cse.cuhk.edu.hk)
- * @brief 141. 环形链表
+ * @brief 142. 环形链表 II
  * @version 0.1
  * @date 2026-02-17
  *
@@ -26,7 +26,6 @@ static void InsertPtrToHashTbl(void *key)
     tmpHashItem->hashKey = key;
     tmpHashItem->hashVal = 0;
     HASH_ADD_PTR(g_hashTbl, hashKey, tmpHashItem);
-    return;
 }
 
 static bool FindPtrHashTbl(void *key)
@@ -53,7 +52,7 @@ static void DelPtrHashTblAllItems()
 
 typedef struct ListNode ListNode;
 
-bool hasCycle(struct ListNode *head)
+struct ListNode *detectCycle(struct ListNode *head)
 {
     ListNode *curNode = head;
     bool isFind = false;
@@ -67,5 +66,8 @@ bool hasCycle(struct ListNode *head)
         curNode = curNode->next;
     }
     DelPtrHashTblAllItems();
-    return isFind;
+    if (isFind) {
+        return curNode;
+    }
+    return NULL;
 }
