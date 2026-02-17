@@ -10,11 +10,62 @@
  */
 
 #include "leetcode_linked_list.h"
+#include "uthash.h"
+
+typedef struct {
+    void *hashKey;
+    int hashVal;
+    UT_hash_handle hh;
+} PtrHashTblItem;
+static PtrHashTblItem *g_hashTbl = NULL;
+
+static void InsertPtrToHashTbl(void *key)
+{
+    PtrHashTblItem *tmpHashItem = NULL;
+    tmpHashItem = (PtrHashTblItem *)calloc(1, sizeof(PtrHashTblItem));
+    tmpHashItem->hashKey = key;
+    tmpHashItem->hashVal = 0;
+    HASH_ADD_PTR(g_hashTbl, hashKey, tmpHashItem);
+    return;
+}
+
+static bool FindPtrInHashTbl(void *key)
+{
+    PtrHashTblItem *tmpHashItem = NULL;
+    HASH_FIND_PTR(g_hashTbl, &key, tmpHashItem);
+    if (tmpHashItem == NULL) {
+        return false;
+    }
+    return true;
+}
+
+static void DelPtrHashTblAllItems()
+{
+    PtrHashTblItem *curItem;
+    PtrHashTblItem *tmpItem;
+    HASH_ITER(hh, g_hashTbl, curItem, tmpItem)
+    {
+        HASH_DEL(g_hashTbl, curItem);
+        free(curItem);
+    }
+    return;
+}
 
 typedef struct ListNode ListNode;
 
 bool hasCycle(struct ListNode *head)
 {
-    UNUSED_PARAM(head);
-    return false;
+    ListNode *curNode = head;
+    bool isFind = false;
+    while (curNode != NULL) {
+        isFind = FindPtrInHashTbl(curNode);
+        if (isFind) {
+            break;
+        } else {
+            InsertPtrToHashTbl(curNode);
+        }
+        curNode = curNode->next;
+    }
+    DelPtrHashTblAllItems();
+    return isFind;
 }
