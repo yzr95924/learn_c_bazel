@@ -12,8 +12,6 @@
 #ifndef LEETCODE_TRAIN_H
 #define LEETCODE_TRAIN_H
 
-#include "common_util.h"
-
-int32_t LeetcodeTestFunc();
+#include "leetcode_linked_list.h"
 
 #endif

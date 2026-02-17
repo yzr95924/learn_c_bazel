@@ -23,6 +23,14 @@ struct ListNode {
 // https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/
 struct ListNode *removeNthFromEnd(struct ListNode *head, int n);
 
+// 21. 合并两个有序链表
+// https://leetcode.cn/problems/merge-two-sorted-lists/description/
+struct ListNode *mergeTwoLists(struct ListNode *list1, struct ListNode *list2);
+
+// 23. 合并K个排序链表
+// https://leetcode.cn/problems/merge-k-sorted-lists/description/
+struct ListNode *mergeKLists(struct ListNode **lists, int listsSize);
+
 // 160. 相交链表
 // https://leetcode.cn/problems/intersection-of-two-linked-lists/description
 struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB);

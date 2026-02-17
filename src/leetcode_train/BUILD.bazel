@@ -8,7 +8,6 @@ package(
 cc_library(
     name = "leetcode_train",
     srcs = glob([
-        "*.cc",
         "*.h",
     ]),
     hdrs = [
