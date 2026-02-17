@@ -51,4 +51,8 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
 // https://leetcode.cn/problems/reverse-linked-list/description/
 struct ListNode *reverseList(struct ListNode *head);
 
+// 234. 回文链表
+// https://leetcode.cn/problems/palindrome-linked-list/description/
+bool isPalindrome(struct ListNode *head);
+
 #endif
