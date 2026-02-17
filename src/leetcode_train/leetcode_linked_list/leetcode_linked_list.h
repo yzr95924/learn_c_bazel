@@ -18,10 +18,17 @@ struct ListNode {
     int val;
     struct ListNode *next;
 };
-typedef struct ListNode ListNode;
+
+// 19. 删除链表的倒数第 N 个结点
+// https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/
+struct ListNode *removeNthFromEnd(struct ListNode *head, int n);
 
 // 160. 相交链表
-// https://leetcode.cn/problems/intersection-of-two-linked-lists/description/?envType=problem-list-v2&envId=2cktkvj
+// https://leetcode.cn/problems/intersection-of-two-linked-lists/description
 struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB);
+
+// 206. 反转链表
+// https://leetcode.cn/problems/reverse-linked-list/description/
+struct ListNode *reverseList(struct ListNode *head);
 
 #endif
