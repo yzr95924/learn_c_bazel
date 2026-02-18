@@ -23,4 +23,16 @@ struct TreeNode {
 // https://leetcode.cn/problems/binary-tree-inorder-traversal/description/
 int *inorderTraversal(struct TreeNode *root, int *returnSize);
 
+// 101. 对称二叉树
+// https://leetcode.cn/problems/symmetric-tree/description/
+bool isSymmetric(struct TreeNode *root);
+
+// 102. 二叉树的层序遍历
+// https://leetcode.cn/problems/binary-tree-level-order-traversal/description/
+int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes);
+
+// 226. 翻转二叉树
+// https://leetcode.cn/problems/invert-binary-tree/description/
+struct TreeNode *invertTree(struct TreeNode *root);
+
 #endif
