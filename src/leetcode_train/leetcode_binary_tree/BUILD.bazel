@@ -6,13 +6,13 @@ package(
 )
 
 cc_library(
-    name = "leetcode_linked_list",
+    name = "leetcode_binary_tree",
     srcs = glob([
         "*.cc",
         "*.h",
     ]),
     hdrs = [
-        "leetcode_linked_list.h",
+        "leetcode_binary_tree.h",
     ],
     copts = GLOBAL_DEFAULT_COPTS,
     includes = [

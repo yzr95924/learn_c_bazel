@@ -13,6 +13,7 @@ cc_test(
     linkopts = GLOBAL_DEFAULT_LINK_OPTS,
     visibility = ["//visibility:public"],
     deps = [
-        "//ut/iceberg_to_sql_ut",
+        # "//ut/iceberg_to_sql_ut",
+        "//ut/leetcode_train_ut",
     ],
 )

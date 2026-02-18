@@ -40,8 +40,47 @@ class LeetcodeLinkedListTest : public testing::Test
     }
 };
 
-TEST_F(LeetcodeLinkedListTest, LeetcodeTrainTest_TEST)
+typedef struct ListNode ListNode;
+
+static void ConvertArrToLinkedList(int *intputArr, int arrSize, ListNode **head)
 {
-    int32_t ret = 0;
-    EXPECT_EQ(1, ret + 1);
+    ListNode *dummyNode = (ListNode *)calloc(1, sizeof(ListNode));
+    ListNode *prevNode = dummyNode;
+    ListNode *curNode = NULL;
+    for (int idx = 0; idx < arrSize; idx++) {
+        curNode = (ListNode *)calloc(1, sizeof(ListNode));
+        curNode->val = intputArr[idx];
+        curNode->next = NULL;
+        prevNode->next = curNode;
+        prevNode = curNode;
+    }
+    *head = dummyNode->next;
+    free(dummyNode);
+    return;
+}
+
+static void FreeLinkedList(ListNode *head)
+{
+    ListNode *nextNode = NULL;
+    ListNode *curNode = head;
+    while (curNode != NULL) {
+        nextNode = curNode->next;
+        free(curNode);
+        curNode = nextNode;
+    }
+    return;
+}
+
+TEST_F(LeetcodeLinkedListTest, 141_SORT_LIST)
+{
+    int arr[3] = {1, 3, 2};
+    ListNode *head = NULL;
+    ConvertArrToLinkedList(arr, 3, &head);
+    ListNode *sortRet = sortList(head);
+    ListNode *curNode = sortRet;
+    while (curNode != NULL) {
+        printf("%d\n", curNode->val);
+        curNode = curNode->next;
+    }
+    FreeLinkedList(head);
 }
