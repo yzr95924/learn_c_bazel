@@ -23,6 +23,14 @@ struct TreeNode {
 // https://leetcode.cn/problems/binary-tree-inorder-traversal/description/
 int *inorderTraversal(struct TreeNode *root, int *returnSize);
 
+// 96. 不同的二叉搜索树
+// https://leetcode.cn/problems/unique-binary-search-trees/description/
+int numTrees(int n);
+
+// 98. 验证二叉搜索树
+// https://leetcode.cn/problems/validate-binary-search-tree/description/
+bool isValidBST(struct TreeNode *root);
+
 // 101. 对称二叉树
 // https://leetcode.cn/problems/symmetric-tree/description/
 bool isSymmetric(struct TreeNode *root);
@@ -46,5 +54,13 @@ void flatten(struct TreeNode *root);
 // 226. 翻转二叉树
 // https://leetcode.cn/problems/invert-binary-tree/description/
 struct TreeNode *invertTree(struct TreeNode *root);
+
+// 236. 二叉树的最近公共祖先
+// https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/description/
+struct TreeNode *lowestCommonAncestor(struct TreeNode *root, struct TreeNode *p, struct TreeNode *q);
+
+// 617. 合并二叉树
+// https://leetcode.cn/problems/merge-two-binary-trees/description/
+struct TreeNode *mergeTrees(struct TreeNode *root1, struct TreeNode *root2);
 
 #endif
