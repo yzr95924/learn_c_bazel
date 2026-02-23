@@ -14,6 +14,10 @@
 
 #include "common_util.h"
 
+// 27. 移除元素
+// https://leetcode.cn/problems/remove-element/description/
+int removeElement(int *nums, int numsSize, int val);
+
 // 287. 寻找重复数
 // https://leetcode.cn/problems/find-the-duplicate-number/description/
 int findDuplicate(int *nums, int numsSize);
