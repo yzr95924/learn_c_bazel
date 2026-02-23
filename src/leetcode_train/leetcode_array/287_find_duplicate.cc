@@ -11,11 +11,12 @@
 
 #include "leetcode_array.h"
 
+// 基于红绿灯模板写的，红区是满足的，绿区是多的
 int findDuplicate(int *nums, int numsSize)
 {
-    int left = 1;
-    int right = numsSize - 1;
-    while (left <= right) {
+    int left = 0;
+    int right = numsSize + 1;
+    while (right - left > 1) {
         int mid = left + (right - left) / 2;
         int count = 0;
         for (int idx = 0; idx < numsSize; idx++) {
@@ -23,11 +24,11 @@ int findDuplicate(int *nums, int numsSize)
                 count++;
             }
         }
-        if (mid < count) {
-            right = mid - 1;
+        if (count > mid) {
+            right = mid;
         } else {
-            left = mid + 1;
+            left = mid;
         }
     }
-    return left;
+    return right;
 }
