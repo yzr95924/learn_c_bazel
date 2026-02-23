@@ -6,22 +6,22 @@ package(
 )
 
 cc_library(
-    name = "leetcode_train",
+    name = "leetcode_array",
     srcs = glob([
+        "*.cc",
         "*.h",
     ]),
     hdrs = [
-        "leetcode_train.h",
+        "leetcode_array.h",
     ],
     copts = GLOBAL_DEFAULT_COPTS,
     includes = [
         ".",
     ],
     linkopts = [],
-    visibility = ["//visibility:public"],
+    visibility = ["//src/leetcode_train:__subpackages__"],
     deps = [
-        "//src/leetcode_train/leetcode_array",
-        "//src/leetcode_train/leetcode_binary_tree",
-        "//src/leetcode_train/leetcode_linked_list",
+        "//src/include:inner_include",
+        "//src/leetcode_train/leetcode_util",
     ],
 )
