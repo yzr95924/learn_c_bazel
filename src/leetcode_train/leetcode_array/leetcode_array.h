@@ -30,6 +30,10 @@ int *searchRange(int *nums, int numsSize, int target, int *returnSize);
 // https://leetcode.cn/problems/maximum-subarray/description/
 int maxSubArray(int *nums, int numsSize);
 
+// 152. 乘积最大子数组
+// https://leetcode.cn/problems/maximum-product-subarray/description/
+int maxProduct(int *nums, int numsSize);
+
 // 287. 寻找重复数
 // https://leetcode.cn/problems/find-the-duplicate-number/description/
 int findDuplicate(int *nums, int numsSize);
@@ -37,5 +41,9 @@ int findDuplicate(int *nums, int numsSize);
 // 704. 二分查找
 // https://leetcode.cn/problems/binary-search/description/
 int search(int *nums, int numsSize, int target);
+
+// 977. 有序数组的平方
+// https://leetcode.cn/problems/squares-of-a-sorted-array/description/
+int *sortedSquares(int *nums, int numsSize, int *returnSize);
 
 #endif
