@@ -12,6 +12,7 @@
 #ifndef LEETCODE_TRAIN_H
 #define LEETCODE_TRAIN_H
 
+#include "leetcode_array.h"
 #include "leetcode_binary_tree.h"
 #include "leetcode_linked_list.h"
 

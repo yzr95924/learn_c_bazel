@@ -18,6 +18,14 @@
 // https://leetcode.cn/problems/remove-element/description/
 int removeElement(int *nums, int numsSize, int val);
 
+// 33. 搜索旋转排序数组
+// https://leetcode.cn/problems/search-in-rotated-sorted-array/description/
+int search_33(int *nums, int numsSize, int target);
+
+// 34. 在排序数组中查找元素的第一个和最后一个位置
+// https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/description/
+int *searchRange(int *nums, int numsSize, int target, int *returnSize);
+
 // 287. 寻找重复数
 // https://leetcode.cn/problems/find-the-duplicate-number/description/
 int findDuplicate(int *nums, int numsSize);
