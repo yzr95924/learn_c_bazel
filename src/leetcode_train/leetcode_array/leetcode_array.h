@@ -26,6 +26,10 @@ int search_33(int *nums, int numsSize, int target);
 // https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/description/
 int *searchRange(int *nums, int numsSize, int target, int *returnSize);
 
+// 53. 最大子数组和
+// https://leetcode.cn/problems/maximum-subarray/description/
+int maxSubArray(int *nums, int numsSize);
+
 // 287. 寻找重复数
 // https://leetcode.cn/problems/find-the-duplicate-number/description/
 int findDuplicate(int *nums, int numsSize);
