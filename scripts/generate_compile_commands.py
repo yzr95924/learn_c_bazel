@@ -135,8 +135,8 @@ def replace_bazel_exec_path(json_path) -> int:
     if os.path.islink(virtual_external_path):
         logging.info("%s exist, do not create again", virtual_external_path)
     else:
-        logical_workspace_name = os.path.join(current_workspace_path, "bazel-" + os.path.basename(
-            _get_current_bazel_workspace()))
+        logical_workspace_name = os.path.join(current_workspace_path,
+            "bazel-" + os.path.basename(_get_current_bazel_workspace()))
         real_external_path = os.path.join(logical_workspace_name, _G_BAZEL_EXTERNAL_PATH)
         os.symlink(real_external_path, virtual_external_path)
     return 0
