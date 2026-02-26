@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-#include "pg_client.h"
 #include "common_util.h"
 #include "linux_os_util.h"
+#include "pg_client.h"
 
 static void InitGlog(const char *argv0)
 {
@@ -11,10 +11,7 @@ static void InitGlog(const char *argv0)
     FLAGS_colorlogtostderr = true;
 };
 
-static void ReleaseGlog()
-{
-    google::ShutdownGoogleLogging();
-}
+static void ReleaseGlog() { google::ShutdownGoogleLogging(); }
 
 int main(int argc, char **argv)
 {
