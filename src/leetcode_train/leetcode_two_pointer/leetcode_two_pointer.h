@@ -14,6 +14,10 @@
 
 #include "common_util.h"
 
+// 3. 无重复字符的最长子串
+// https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/
+int lengthOfLongestSubstring(char *s);
+
 // 15. 三数之和
 // https://leetcode.cn/problems/3sum/description/
 int **threeSum(int *nums, int numsSize, int *returnSize, int **returnColumnSizes);

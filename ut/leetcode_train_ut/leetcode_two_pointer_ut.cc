@@ -40,8 +40,10 @@ class LeetcodeTwoPointerTest : public testing::Test
     }
 };
 
-TEST_F(LeetcodeTwoPointerTest, 15_TREE_SUM)
+TEST_F(LeetcodeTwoPointerTest, 3_TEST)
 {
+    char s[] = "abcabcbb";
+    lengthOfLongestSubstring(s);
     // int nums[] = {0, 0, 0};
     // int returnSize = 0;
     // int *returnColumnSizes;
