@@ -25,5 +25,6 @@ cc_library(
         "//src/leetcode_train/leetcode_binary_tree",
         "//src/leetcode_train/leetcode_linked_list",
         "//src/leetcode_train/leetcode_stack_queue",
+        "//src/leetcode_train/leetcode_two_pointer",
     ],
 )
