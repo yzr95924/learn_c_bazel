@@ -28,6 +28,10 @@ int **combinationSum2(int *candidates, int candidatesSize, int target, int *retu
 // https://leetcode.cn/problems/permutations/description/
 int **permute(int *nums, int numsSize, int *returnSize, int **returnColumnSizes);
 
+// 47. 全排列 II
+// https://leetcode.cn/problems/permutations-ii/description/
+int **permuteUnique(int *nums, int numsSize, int *returnSize, int **returnColumnSizes);
+
 // 77. 组合
 // https://leetcode.cn/problems/combinations/description/
 int **combine(int n, int k, int *returnSize, int **returnColumnSizes);
