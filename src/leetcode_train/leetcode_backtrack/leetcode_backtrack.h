@@ -16,11 +16,17 @@
 
 // 39. 组合总和
 // https://leetcode.cn/problems/combination-sum/description/
-int **combinationSum(int *candidates, int candidatesSize, int target, int *returnSize, int **returnColumnSizes);
+int **combinationSum(int *candidates, int candidatesSize, int target, int *returnSize,
+                     int **returnColumnSizes);
 
 // 40. 组合总和 II
 // https://leetcode.cn/problems/combination-sum-ii/description/
-int **combinationSum2(int *candidates, int candidatesSize, int target, int *returnSize, int **returnColumnSizes);
+int **combinationSum2(int *candidates, int candidatesSize, int target, int *returnSize,
+                      int **returnColumnSizes);
+
+// 46. 全排列
+// https://leetcode.cn/problems/permutations/description/
+int **permute(int *nums, int numsSize, int *returnSize, int **returnColumnSizes);
 
 // 77. 组合
 // https://leetcode.cn/problems/combinations/description/
