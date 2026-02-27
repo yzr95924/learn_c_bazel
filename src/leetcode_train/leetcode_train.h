@@ -14,6 +14,7 @@
 
 #include "leetcode_app.h"
 #include "leetcode_array.h"
+#include "leetcode_backtrack.h"
 #include "leetcode_binary_tree.h"
 #include "leetcode_linked_list.h"
 #include "leetcode_two_pointer.h"

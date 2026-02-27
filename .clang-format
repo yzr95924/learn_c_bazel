@@ -11,7 +11,7 @@ PointerAlignment: Right             # 指针和reference靠近变量
 DerivePointerAlignment: false       # 关闭自动推导，防止不确定性
 
 # 换行与行宽控制
-ColumnLimit:    120                 # 列宽120
+ColumnLimit:    100                 # 行宽120
 BreakBeforeBinaryOperators: None    # 二元运算符（+/-/*/= 等）不强制换行
 BreakStringLiterals: 'true'         # 长字符串自动拆分为多行
 ContinuationIndentWidth: '4'        # 换行后的补充缩进

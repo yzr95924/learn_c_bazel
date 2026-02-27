@@ -22,23 +22,23 @@ typedef struct {
     bool *isUsedArr;
 } BackTrackState;
 
-static void BackTrack(ANsWrapper *ansWrapper, BackTrackState *btState, int target, int *maxAns)
-{
-    int curSum = 0;
-    for (int idx = 0; idx < btState->curSize; idx++) {
-        curSum += btState->curAns[idx];
-    }
-    if (curSum == target) {
-        ansWrapper->retAns[ansWrapper->cnt] =
-    }
+// static void BackTrack(ANsWrapper *ansWrapper, BackTrackState *btState, int target, int *maxAns)
+// {
+//     int curSum = 0;
+//     for (int idx = 0; idx < btState->curSize; idx++) {
+//         curSum += btState->curAns[idx];
+//     }
+//     if (curSum == target) {
+//         ansWrapper->retAns[ansWrapper->cnt] =
+//     }
 
-    return;
-}
+//     return;
+// }
 
 int **combinationSum2(int *candidates, int candidatesSize, int target, int *returnSize, int **returnColumnSizes)
 {
-    int maxAns = candidatesSize;
-    bool *isUsedArr = (bool *)calloc(candidatesSize, sizeof(bool)); // default to false
+    // int maxAns = candidatesSize;
+    // bool *isUsedArr = (bool *)calloc(candidatesSize, sizeof(bool)); // default to false
 
     UNUSED_PARAM(candidates);
     UNUSED_PARAM(candidatesSize);

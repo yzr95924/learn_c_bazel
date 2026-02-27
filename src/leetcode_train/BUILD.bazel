@@ -22,6 +22,7 @@ cc_library(
     deps = [
         "//src/leetcode_train/leetcode_app",
         "//src/leetcode_train/leetcode_array",
+        "//src/leetcode_train/leetcode_backtrack",
         "//src/leetcode_train/leetcode_binary_tree",
         "//src/leetcode_train/leetcode_linked_list",
         "//src/leetcode_train/leetcode_stack_queue",
