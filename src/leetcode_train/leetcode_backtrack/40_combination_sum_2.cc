@@ -11,39 +11,89 @@
 
 #include "leetcode_backtrack.h"
 
+static int CmpAscend(const void *a, const void *b)
+{
+    int latter = *(const int *)a;
+    int former = *(const int *)b;
+    return latter - former;
+}
+
 typedef struct {
     int **retAns;
-    int cnt;
-} ANsWrapper;
+    int *retColSizes;
+    size_t ansCnt;
+    size_t maxAnsCnt;
+} AnsWrapper;
 
 typedef struct {
     int *curAns;
-    int curSize;
-    bool *isUsedArr;
+    bool *isUsed;
+    int curAnsSize;
 } BackTrackState;
 
-// static void BackTrack(ANsWrapper *ansWrapper, BackTrackState *btState, int target, int *maxAns)
-// {
-//     int curSum = 0;
-//     for (int idx = 0; idx < btState->curSize; idx++) {
-//         curSum += btState->curAns[idx];
-//     }
-//     if (curSum == target) {
-//         ansWrapper->retAns[ansWrapper->cnt] =
-//     }
-
-//     return;
-// }
-
-int **combinationSum2(int *candidates, int candidatesSize, int target, int *returnSize, int **returnColumnSizes)
+static void BackTrack(int *candidate, int candidatesSize, BackTrackState *btState,
+                      AnsWrapper *ansWrapper, int target, int startIdx)
 {
-    // int maxAns = candidatesSize;
-    // bool *isUsedArr = (bool *)calloc(candidatesSize, sizeof(bool)); // default to false
+    int curSum = 0;
+    for (int idx = 0; idx < btState->curAnsSize; idx++) {
+        curSum += btState->curAns[idx];
+    }
+    if (curSum > target) {
+        return;
+    }
+    if (curSum == target) {
+        ansWrapper->retAns[ansWrapper->ansCnt] =
+            (int *)calloc((size_t)btState->curAnsSize, sizeof(int));
+        ansWrapper->retColSizes[ansWrapper->ansCnt] = btState->curAnsSize;
+        memcpy(ansWrapper->retAns[ansWrapper->ansCnt], btState->curAns,
+               (size_t)btState->curAnsSize * sizeof(int));
+        ansWrapper->ansCnt++;
 
-    UNUSED_PARAM(candidates);
-    UNUSED_PARAM(candidatesSize);
-    UNUSED_PARAM(target);
-    UNUSED_PARAM(returnSize);
-    UNUSED_PARAM(returnColumnSizes);
-    return NULL;
+        if (ansWrapper->ansCnt == ansWrapper->maxAnsCnt) {
+            ansWrapper->maxAnsCnt = ansWrapper->maxAnsCnt * 2;
+            ansWrapper->retAns =
+                (int **)realloc(ansWrapper->retAns, ansWrapper->maxAnsCnt * sizeof(int *));
+            ansWrapper->retColSizes =
+                (int *)realloc(ansWrapper->retColSizes, ansWrapper->maxAnsCnt * sizeof(int));
+        }
+    }
+
+    for (int idx = startIdx; idx < candidatesSize; idx++) {
+        if (idx > 0 && candidate[idx] == candidate[idx - 1] && btState->isUsed[idx - 1] == false) {
+            continue;
+        }
+
+        // push
+        btState->isUsed[idx] = true;
+        btState->curAns[btState->curAnsSize] = candidate[idx];
+        btState->curAnsSize++;
+        BackTrack(candidate, candidatesSize, btState, ansWrapper, target, idx + 1);
+        // pop out
+        btState->curAnsSize--;
+        btState->isUsed[idx] = false;
+    }
+    return;
+}
+
+int **combinationSum2(int *candidates, int candidatesSize, int target, int *returnSize,
+                      int **returnColumnSizes)
+{
+    qsort(candidates, (size_t)candidatesSize, sizeof(int), CmpAscend);
+    AnsWrapper ansWrapper;
+    ansWrapper.maxAnsCnt = (size_t)candidatesSize;
+    ansWrapper.ansCnt = 0;
+    ansWrapper.retAns = (int **)calloc(ansWrapper.maxAnsCnt, sizeof(int *));
+    ansWrapper.retColSizes = (int *)calloc(ansWrapper.maxAnsCnt, sizeof(int));
+    BackTrackState btState;
+    btState.curAnsSize = 0;
+    btState.curAns = (int *)calloc((size_t)candidatesSize * 100, sizeof(int));
+    btState.isUsed = (bool *)calloc((size_t)candidatesSize, sizeof(bool));
+
+    BackTrack(candidates, candidatesSize, &btState, &ansWrapper, target, 0);
+
+    *returnSize = (int)ansWrapper.ansCnt;
+    *returnColumnSizes = ansWrapper.retColSizes;
+    free(btState.curAns);
+    free(btState.isUsed);
+    return ansWrapper.retAns;
 }
