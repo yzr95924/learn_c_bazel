@@ -45,4 +45,8 @@ int lRUCacheGet(LRUCache *obj, int key);
 void lRUCachePut(LRUCache *obj, int key, int value);
 void lRUCacheFree(LRUCache *obj);
 
+// 621. 任务调度器
+// https://leetcode.cn/problems/task-scheduler/description/
+int leastInterval(char *tasks, int tasksSize, int n);
+
 #endif
